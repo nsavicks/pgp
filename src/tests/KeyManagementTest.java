@@ -1,16 +1,21 @@
+package tests;
+
 import org.bouncycastle.openpgp.PGPException;
+import org.bouncycastle.openpgp.PGPKeyRing;
 import org.bouncycastle.openpgp.PGPPublicKeyRing;
 import org.bouncycastle.openpgp.PGPSecretKeyRing;
 import org.bouncycastle.openpgp.jcajce.JcaPGPPublicKeyRingCollection;
+import pgp.KeyManagement;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.Iterator;
 
-public class Test
+public class KeyManagementTest
 {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchProviderException, PGPException, IOException
@@ -18,20 +23,19 @@ public class Test
 
         KeyManagement.GenerateKeyRing("nebojsa", "nebojsa@nebojsa.com", "sifra", 1024, true, 1024);
 
-        File f = new File("C:\\Users\\Nebojsa\\Desktop\\test.asc");
+        File f = new File("C:\\Users\\Nebojsa\\Desktop\\secret.asc");
 
-        if (f.exists())
-            f.delete();
+        File f2 = new File("C:\\Users\\Nebojsa\\Desktop\\public.asc");
 
-        f.createNewFile();
 
-        FileOutputStream out = new FileOutputStream(f);
 
-        Iterator<PGPSecretKeyRing> it  = KeyManagement.secretKeyRings.getKeyRings();
+        PGPKeyRing ringSecret = KeyManagement.ImportKeyRing(new FileInputStream(f));
 
-        KeyManagement.ExportSecretKeyRing(it.next(), out, true);
+        PGPKeyRing ringPublic = KeyManagement.ImportKeyRing(new FileInputStream(f2));
 
-        out.close();
+        System.out.println(ringSecret.getPublicKey().getKeyID());
+
+        System.out.println(ringPublic.getPublicKey().getKeyID());
 
     }
 

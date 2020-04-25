@@ -1,8 +1,10 @@
+import org.bouncycastle.bcpg.ArmoredInputStream;
 import org.bouncycastle.bcpg.SymmetricEncIntegrityPacket;
 import org.bouncycastle.openpgp.*;
 import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.operator.PBESecretKeyDecryptor;
 import org.bouncycastle.openpgp.operator.PublicKeyDataDecryptorFactory;
+import org.bouncycastle.openpgp.operator.bc.BcPGPContentVerifierBuilderProvider;
 import org.bouncycastle.openpgp.operator.bc.BcPGPDataEncryptorBuilder;
 import org.bouncycastle.openpgp.operator.bc.BcPublicKeyDataDecryptorFactory;
 import org.bouncycastle.openpgp.operator.jcajce.JcaPGPContentSignerBuilder;
@@ -41,13 +43,15 @@ public class Main
         Iterator<PGPSecretKey> it = o.getSecretKeys();
         it.next();
 
-        PGPPrivateKey pgpPrivateKey = it.next().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build("nebojsa".toCharArray()));
+        PGPSecretKey secretKey = it.next();
 
-        PGPPublicKey pgpPublicKey = o.getPublicKey();
+        PGPPrivateKey pgpPrivateKey = secretKey.extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build("sifra".toCharArray()));
+
+        PGPPublicKey pgpPublicKey = secretKey.getPublicKey();
 
         // PODACI
 
-        factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(new FileInputStream(f2)));
+        factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(new ArmoredInputStream(new FileInputStream(f2))));
 
         PGPEncryptedDataList o2 = (PGPEncryptedDataList) factory.nextObject();
 
@@ -61,19 +65,34 @@ public class Main
 
         PGPCompressedData o3 = (PGPCompressedData) factory.nextObject();
 
-        // DALJE
-
         factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(o3.getDataStream()));
 
-        Object o4 = factory.nextObject();
+        // DALJE
 
-        PGPLiteralData o5 = (PGPLiteralData) factory.nextObject();
+        PGPOnePassSignatureList list = (PGPOnePassSignatureList) factory.nextObject();
 
-        byte[] buff = new byte[19];
+        PGPOnePassSignature onePassSignature = list.get(0);
 
-        o5.getInputStream().read(buff);
+        onePassSignature.init(new BcPGPContentVerifierBuilderProvider(), o.getPublicKey());
 
-        System.out.println(new String(buff, StandardCharsets.UTF_8));
+        PGPLiteralData literalData = (PGPLiteralData) factory.nextObject();
+
+        InputStream rawData = literalData.getInputStream();
+
+        byte buf[] = new byte[rawData.available()];
+
+        onePassSignature.update(buf);
+
+        PGPSignatureList signatureList = (PGPSignatureList) factory.nextObject();
+
+
+
+
+//        byte[] buff = new byte[19];
+//
+//        o5.getInputStream().read(buff);
+//
+//        System.out.println(new String(buff, StandardCharsets.UTF_8));
 
     }
 }

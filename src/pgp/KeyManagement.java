@@ -1,8 +1,11 @@
+package pgp;
+
 import org.bouncycastle.bcpg.ArmoredOutputStream;
 import org.bouncycastle.bcpg.HashAlgorithmTags;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jce.spec.ElGamalGenParameterSpec;
 import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.bc.BcPGPPublicKeyRingCollection;
 import org.bouncycastle.openpgp.jcajce.JcaPGPPublicKeyRing;
 import org.bouncycastle.openpgp.jcajce.JcaPGPPublicKeyRingCollection;
@@ -12,6 +15,7 @@ import org.bouncycastle.openpgp.operator.PGPDigestCalculator;
 import org.bouncycastle.openpgp.operator.bc.BcPGPKeyPair;
 import org.bouncycastle.openpgp.operator.jcajce.*;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.*;
@@ -95,6 +99,7 @@ public class KeyManagement
 
     }
 
+
     public static void ExportSecretKeyRing(PGPSecretKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
     {
 
@@ -105,6 +110,63 @@ public class KeyManagement
         }
         else{
             keyRing.encode(out);
+        }
+
+    }
+
+    public static PGPKeyRing ImportKeyRing(FileInputStream in) throws IOException
+    {
+
+        BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(in));
+
+        Object o = factory.nextObject();
+
+        if (o instanceof PGPPublicKeyRing){
+
+            publicKeyRings = JcaPGPPublicKeyRingCollection.addPublicKeyRing(publicKeyRings, (PGPPublicKeyRing) o);
+
+        }
+        else if (o instanceof PGPSecretKeyRing){
+
+            secretKeyRings = JcaPGPSecretKeyRingCollection.addSecretKeyRing(secretKeyRings, (PGPSecretKeyRing) o);
+            // TODO Import publick key ring???
+
+        }
+
+
+
+
+        return (PGPKeyRing) o;
+
+    }
+
+
+    public static void RemovePublicKeyRing(long keyID) throws PGPException
+    {
+
+        if (publicKeyRings.contains(keyID))
+        {
+
+            PGPPublicKeyRing pgpPublicKeyRing = publicKeyRings.getPublicKeyRing(keyID);
+
+            publicKeyRings = JcaPGPPublicKeyRingCollection.removePublicKeyRing(publicKeyRings, pgpPublicKeyRing);
+
+        }
+
+    }
+
+    public static void RemoveSecretKeyRing(long keyID, String password) throws PGPException
+    {
+
+        if (secretKeyRings.contains(keyID)){
+
+            PGPSecretKeyRing secretKeyRing = secretKeyRings.getSecretKeyRing(keyID);
+
+            // THIS WILL THROW EXCEPTION IF PASSWORD IS NOT CORRECT
+            secretKeyRing.getSecretKey().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+
+            secretKeyRings = JcaPGPSecretKeyRingCollection.removeSecretKeyRing(secretKeyRings, secretKeyRing);
+
         }
 
     }
