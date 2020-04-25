@@ -11,7 +11,7 @@ import org.bouncycastle.openpgp.operator.jcajce.JcaPGPContentSignerBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcaPGPPrivateKey;
 import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
 import org.bouncycastle.util.io.TeeInputStream;
-import sun.misc.IOUtils;
+import pgp.MessageManagement;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -33,6 +33,7 @@ public class Main
 
         File f = new File("C:\\Users\\Nebojsa\\Desktop\\pgp\\src\\privatekey.asc");
         File f2 = new File("C:\\Users\\Nebojsa\\Desktop\\pgp\\src\\pgpexample.txt");
+
 
         FileInputStream fileInputStream = new FileInputStream(f);
 

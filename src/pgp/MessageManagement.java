@@ -1,26 +1,21 @@
 package pgp;
 
-import jdk.internal.util.xml.impl.Input;
 import org.bouncycastle.bcpg.*;
 import org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 import org.bouncycastle.openpgp.*;
 import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
-import org.bouncycastle.openpgp.operator.bc.BcPBEKeyEncryptionMethodGenerator;
-import org.bouncycastle.openpgp.operator.bc.BcPGPDataEncryptorBuilder;
-import org.bouncycastle.openpgp.operator.bc.BcPublicKeyDataDecryptorFactory;
-import org.bouncycastle.openpgp.operator.bc.BcPublicKeyKeyEncryptionMethodGenerator;
+import org.bouncycastle.openpgp.operator.bc.*;
 import org.bouncycastle.openpgp.operator.jcajce.*;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.sound.midi.Soundbank;
 import javax.xml.crypto.dsig.keyinfo.PGPData;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.SignatureException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class MessageManagement
 {
@@ -202,6 +197,15 @@ public class MessageManagement
     ) throws IOException, PGPException
     {
 
+        boolean verified = true;
+        PGPOnePassSignatureList onePassSignatureList = null;
+
+        // INFO DATA
+        List<String> validVerifiers = new ArrayList<>();
+        List<String> invalidVerifiers = new ArrayList<>();
+        List<Long> notFoundKeys = new ArrayList<>();
+        String finalMessage = null;
+
         FileInputStream fileInputStream = null;
 
         try{
@@ -211,6 +215,8 @@ public class MessageManagement
             BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(fileInputStream));
 
             Object packet = null;
+
+            PGPSecretKeyRing secretKeyRing = null;
 
             while (true){
 
@@ -223,8 +229,6 @@ public class MessageManagement
                     // TRAZI PRIVATEKEY I PASSWORD
 
                     PGPEncryptedDataList encryptedDataList = (PGPEncryptedDataList) packet;
-
-                    PGPSecretKeyRing secretKeyRing = null;
 
                     PGPPublicKeyEncryptedData encryptedData = null;
 
@@ -263,7 +267,8 @@ public class MessageManagement
 
                     PGPCompressedData compressedData = (PGPCompressedData) packet;
 
-                    // TODO Provera algoritma kompresije
+                    //if (compressedData.getAlgorithm() != CompressionAlgorithmTags.ZIP)
+                        //throw new PGPException("Compression algorithm not supported! (Only ZIP algorithm is supported)");
 
                     factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(compressedData.getDataStream()));
 
@@ -271,7 +276,84 @@ public class MessageManagement
 
                 if (packet instanceof PGPOnePassSignatureList){
 
+                    onePassSignatureList = (PGPOnePassSignatureList) packet;
 
+                    for (int i = 0; i < onePassSignatureList.size(); i++){
+
+                        PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
+
+                        long keyId = onePassSignature.getKeyID();
+
+                        PGPPublicKeyRing signerPublicKeyRing = KeyManagement.GetPublicKeyRing(keyId);
+
+                        if (signerPublicKeyRing == null){
+
+                            notFoundKeys.add(keyId);
+
+                        }
+                        else {
+
+                            PGPPublicKey signerPublicKey = signerPublicKeyRing.getPublicKey();
+
+                            if (signerPublicKey.getAlgorithm() != SignaturePacket.DSA)
+                                throw new PGPException("Signing algorithm not supported (Only DSA algorithm is supported");
+
+                            onePassSignature.init(new BcPGPContentVerifierBuilderProvider(), signerPublicKey);
+
+                        }
+
+                    }
+
+                }
+
+                if (packet instanceof PGPLiteralData){
+
+                    PGPLiteralData literalData = (PGPLiteralData) packet;
+
+                    InputStream rawData = literalData.getInputStream();
+
+                    byte[] buffer = new byte[rawData.available()];
+
+                    rawData.read(buffer);
+
+                    finalMessage = new String(buffer);
+
+                    for (int i = 0; i < onePassSignatureList.size(); i++) {
+
+                        PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
+
+                        onePassSignature.update(buffer);
+
+                    }
+
+                }
+
+                if (packet instanceof  PGPSignatureList) {
+
+                    PGPSignatureList signatureList = (PGPSignatureList) packet;
+
+                    for (int i = 0; i < signatureList.size(); i++) {
+
+                        PGPSignature signature = signatureList.get(i);
+
+                        PGPOnePassSignature onePassSignature = onePassSignatureList.get(onePassSignatureList.size() - i - 1);
+
+                        if (!onePassSignature.verify(signature)) {
+
+                            verified = false;
+
+                            // adding to invalid verifiers list
+                            invalidVerifiers.add(KeyManagement.GetKeyOwnerInfo(signature.getKeyID()));
+
+                        }
+                        else {
+
+                            // adding to valid verifiers list
+                            validVerifiers.add(KeyManagement.GetKeyOwnerInfo(signature.getKeyID()));
+
+                        }
+
+                    }
 
                 }
             }
@@ -280,7 +362,26 @@ public class MessageManagement
         finally
         {
 
+            // WRITING INFO
+            if (finalMessage != ""){
+
+                System.out.println("Decrypted message: " + finalMessage);
+                System.out.println("Users verified: " + validVerifiers.toString());
+                System.out.println("Users failed to verify: " + invalidVerifiers.toString());
+                if (verified)
+                    System.out.println("Message verified!");
+                else
+                    System.out.println("Message not verified");
+
+            }
+            else {
+                System.out.println("Message failed to decrypt");
+            }
+
+            fileInputStream.close();
+
         }
+        return verified;
     }
 
 }

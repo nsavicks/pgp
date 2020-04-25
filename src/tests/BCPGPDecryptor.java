@@ -11,12 +11,10 @@ import java.util.Iterator;
 
 import org.bouncycastle.openpgp.*;
 
-import com.sun.xml.internal.ws.message.ByteArrayAttachment;
 import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.operator.bc.BcPGPContentVerifierBuilderProvider;
 import org.bouncycastle.openpgp.operator.bc.BcPublicKeyDataDecryptorFactory;
 import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
-import sun.misc.IOUtils;
 
 public class BCPGPDecryptor {
 

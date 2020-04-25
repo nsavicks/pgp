@@ -20,11 +20,11 @@ public class MessageManagementTest
     public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchProviderException, PGPException, IOException, SignatureException
     {
 
-        File f = new File("C:\\Users\\Nebojsa\\Desktop\\secret.asc");
+        File f = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\privatekey.asc");
 
-        File f2 = new File("C:\\Users\\Nebojsa\\Desktop\\public.asc");
+        File f2 = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\publickey.asc");
 
-        File f3 = new File("C:\\Users\\Nebojsa\\Desktop\\poruka.txt");
+        File f3 = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\poruka.txt");
 
         if (f3.exists()){
             f3.delete();
@@ -48,7 +48,7 @@ public class MessageManagementTest
 
         FileOutputStream fout = new FileOutputStream(f3);
 
-        MessageManagement.SendMessage("Proba poruke", false, true, true, true,
+        MessageManagement.SendMessage("Proba poruke", true, true, true, true,
                 KeyManagement.secretKeyRings.getKeyRings().next(),
                 publicKeys,
                 SymmetricKeyAlgorithmTags.AES_128,
@@ -56,8 +56,10 @@ public class MessageManagementTest
                 fout
                 );
 
-
         fout.close();
+
+        MessageManagement.RecieveMessage(f3, "sifra");
+
     }
 
 }
