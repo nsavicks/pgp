@@ -81,11 +81,15 @@ public class Main
 
         byte buf[] = new byte[rawData.available()];
 
+        rawData.read(buf);
+
         onePassSignature.update(buf);
 
         PGPSignatureList signatureList = (PGPSignatureList) factory.nextObject();
 
-
+        if (onePassSignature.verify(signatureList.get(0))){
+            System.out.println("VERIFIED");
+        }
 
 
 //        byte[] buff = new byte[19];

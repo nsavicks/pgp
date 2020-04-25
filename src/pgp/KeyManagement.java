@@ -99,7 +99,6 @@ public class KeyManagement
 
     }
 
-
     public static void ExportSecretKeyRing(PGPSecretKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
     {
 
@@ -140,7 +139,6 @@ public class KeyManagement
 
     }
 
-
     public static void RemovePublicKeyRing(long keyID) throws PGPException
     {
 
@@ -168,6 +166,20 @@ public class KeyManagement
             secretKeyRings = JcaPGPSecretKeyRingCollection.removeSecretKeyRing(secretKeyRings, secretKeyRing);
 
         }
+
+    }
+
+    public static PGPSecretKeyRing GetSecretKeyRing(long keyID) throws PGPException
+    {
+
+        return secretKeyRings.getSecretKeyRing(keyID);
+
+    }
+
+    public static PGPPublicKeyRing GetPublicKeyRing(long keyID) throws PGPException
+    {
+
+        return publicKeyRings.getPublicKeyRing(keyID);
 
     }
 

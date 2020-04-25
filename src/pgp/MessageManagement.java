@@ -1,10 +1,13 @@
 package pgp;
 
+import jdk.internal.util.xml.impl.Input;
 import org.bouncycastle.bcpg.*;
 import org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.operator.bc.BcPBEKeyEncryptionMethodGenerator;
 import org.bouncycastle.openpgp.operator.bc.BcPGPDataEncryptorBuilder;
+import org.bouncycastle.openpgp.operator.bc.BcPublicKeyDataDecryptorFactory;
 import org.bouncycastle.openpgp.operator.bc.BcPublicKeyKeyEncryptionMethodGenerator;
 import org.bouncycastle.openpgp.operator.jcajce.*;
 
@@ -189,6 +192,94 @@ public class MessageManagement
             {
                 in.close();
             }
+        }
+    }
+
+
+    public static boolean RecieveMessage(
+            File file,
+            String password
+    ) throws IOException, PGPException
+    {
+
+        FileInputStream fileInputStream = null;
+
+        try{
+
+            fileInputStream = new FileInputStream(file);
+
+            BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(fileInputStream));
+
+            Object packet = null;
+
+            while (true){
+
+                packet = factory.nextObject();
+
+                if (packet == null) break;
+
+                if (packet instanceof PGPEncryptedDataList){
+
+                    // TRAZI PRIVATEKEY I PASSWORD
+
+                    PGPEncryptedDataList encryptedDataList = (PGPEncryptedDataList) packet;
+
+                    PGPSecretKeyRing secretKeyRing = null;
+
+                    PGPPublicKeyEncryptedData encryptedData = null;
+
+                    for (int i = 0; i < encryptedDataList.size(); i++){
+
+                        encryptedData = (PGPPublicKeyEncryptedData) encryptedDataList.get(i);
+
+                        secretKeyRing = KeyManagement.GetSecretKeyRing(encryptedData.getKeyID());
+
+                        if (secretKeyRing != null) break;
+
+                    }
+
+                    if (secretKeyRing == null) throw new PGPException("Private key for decryption not found!");
+
+                    Iterator<PGPSecretKey> iterator = secretKeyRing.getSecretKeys();
+
+                    PGPSecretKey masterSecretKey = iterator.next();
+
+                    if (!iterator.hasNext()) throw new PGPException("No subkey for decryption!");
+
+                    PGPSecretKey secretSubKey = iterator.next();
+
+                    // TODO provera da li je podrzan algoritam
+
+                    // TODO password se unosi iz dialoga
+                    PGPPrivateKey privateKey = secretSubKey.extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+
+                    InputStream plainStream = encryptedData.getDataStream(new BcPublicKeyDataDecryptorFactory(privateKey));
+
+                    factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(plainStream));
+
+                }
+
+                if (packet instanceof PGPCompressedData){
+
+                    PGPCompressedData compressedData = (PGPCompressedData) packet;
+
+                    // TODO Provera algoritma kompresije
+
+                    factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(compressedData.getDataStream()));
+
+                }
+
+                if (packet instanceof PGPOnePassSignatureList){
+
+
+
+                }
+            }
+
+        }
+        finally
+        {
+
         }
     }
 

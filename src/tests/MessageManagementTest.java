@@ -48,7 +48,7 @@ public class MessageManagementTest
 
         FileOutputStream fout = new FileOutputStream(f3);
 
-        MessageManagement.SendMessage("Proba poruke", true, true, true, true,
+        MessageManagement.SendMessage("Proba poruke", false, true, true, true,
                 KeyManagement.secretKeyRings.getKeyRings().next(),
                 publicKeys,
                 SymmetricKeyAlgorithmTags.AES_128,
