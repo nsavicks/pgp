@@ -2,25 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0deffce8-8d40-428b-b4a4-531730fafb3c" name="Default Changelist" comment="Added AES128 class">
-      <change afterPath="$PROJECT_DIR$/src/publickey.asc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcpg_jdk15to18_165.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcprov_ext_jdk15to18_165.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgpexample.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgpexample.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/privatekey.asc" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/privatekey.asc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/BCPGPDecryptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/BCPGPDecryptor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pgp/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/KeyManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pgp/MessageManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/MessageManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pgpexample.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgpexample.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/privatekey.asc" beforeDir="false" afterPath="$PROJECT_DIR$/src/privatekey.asc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/poruka.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/poruka.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/MessageManagementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/MessageManagementTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -180,42 +168,42 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="389" y="106" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1587850891366" />
-    <state width="1323" height="195" key="GridCell.Tab.0.bottom" timestamp="1587854899688">
+    <state width="1323" height="103" key="GridCell.Tab.0.bottom" timestamp="1587856119866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="195" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587854899688" />
-    <state width="1323" height="195" key="GridCell.Tab.0.center" timestamp="1587854899688">
+    <state width="1323" height="103" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587856119866" />
+    <state width="1323" height="103" key="GridCell.Tab.0.center" timestamp="1587856119866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="195" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587854899688" />
-    <state width="1323" height="195" key="GridCell.Tab.0.left" timestamp="1587854899688">
+    <state width="1323" height="103" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587856119866" />
+    <state width="1323" height="103" key="GridCell.Tab.0.left" timestamp="1587856119866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="195" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587854899688" />
-    <state width="1323" height="195" key="GridCell.Tab.0.right" timestamp="1587854899688">
+    <state width="1323" height="103" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587856119866" />
+    <state width="1323" height="103" key="GridCell.Tab.0.right" timestamp="1587856119866">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="195" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587854899688" />
-    <state width="1323" height="256" key="GridCell.Tab.1.bottom" timestamp="1587850843440">
+    <state width="1323" height="103" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587856119866" />
+    <state width="1323" height="256" key="GridCell.Tab.1.bottom" timestamp="1587855653474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="256" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587850843440" />
-    <state width="1323" height="256" key="GridCell.Tab.1.center" timestamp="1587850843440">
+    <state width="1323" height="256" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587855653474" />
+    <state width="1323" height="256" key="GridCell.Tab.1.center" timestamp="1587855653474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="256" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587850843440" />
-    <state width="1323" height="256" key="GridCell.Tab.1.left" timestamp="1587850843440">
+    <state width="1323" height="256" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1587855653474" />
+    <state width="1323" height="256" key="GridCell.Tab.1.left" timestamp="1587855653474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="256" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587850843440" />
-    <state width="1323" height="256" key="GridCell.Tab.1.right" timestamp="1587850843440">
+    <state width="1323" height="256" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1587855653474" />
+    <state width="1323" height="256" key="GridCell.Tab.1.right" timestamp="1587855653474">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="256" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587850843440" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1587850896205">
+    <state width="1323" height="256" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1587855653474" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1587855131412">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587850896205" />
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587855131412" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1587853096548">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -228,6 +216,11 @@
           <url>jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyEncryptedData.class</url>
           <line>46</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pgp/MessageManagement.java</url>
+          <line>340</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

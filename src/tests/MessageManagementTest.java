@@ -26,11 +26,11 @@ public class MessageManagementTest
 
         File f3 = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\poruka.txt");
 
-        if (f3.exists()){
-            f3.delete();
-        }
-
-        f3.createNewFile();
+//        if (f3.exists()){
+//            f3.delete();
+//        }
+//
+//        f3.createNewFile();
 
         FileInputStream fin = new FileInputStream(f);
         FileInputStream fin2 = new FileInputStream(f2);
@@ -46,17 +46,17 @@ public class MessageManagementTest
 
         publicKeys.add(KeyManagement.publicKeyRings.getKeyRings().next());
 
-        FileOutputStream fout = new FileOutputStream(f3);
+//        FileOutputStream fout = new FileOutputStream(f3);
 
-        MessageManagement.SendMessage("Proba poruke", true, true, true, true,
-                KeyManagement.secretKeyRings.getKeyRings().next(),
-                publicKeys,
-                SymmetricKeyAlgorithmTags.AES_128,
-                "sifra",
-                fout
-                );
+//        MessageManagement.SendMessage("Proba poruke", true, true, true, true,
+//                KeyManagement.secretKeyRings.getKeyRings().next(),
+//                publicKeys,
+//                SymmetricKeyAlgorithmTags.AES_128,
+//                "sifra",
+//                fout
+//                );
 
-        fout.close();
+//        fout.close();
 
         MessageManagement.RecieveMessage(f3, "sifra");
 

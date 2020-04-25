@@ -202,7 +202,6 @@ public class MessageManagement
 
         // INFO DATA
         List<String> validVerifiers = new ArrayList<>();
-        List<String> invalidVerifiers = new ArrayList<>();
         List<Long> notFoundKeys = new ArrayList<>();
         String finalMessage = null;
 
@@ -322,7 +321,8 @@ public class MessageManagement
 
                         PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
 
-                        onePassSignature.update(buffer);
+                        if (!notFoundKeys.contains(onePassSignature.getKeyID()))
+                            onePassSignature.update(buffer);
 
                     }
 
@@ -338,12 +338,9 @@ public class MessageManagement
 
                         PGPOnePassSignature onePassSignature = onePassSignatureList.get(onePassSignatureList.size() - i - 1);
 
-                        if (!onePassSignature.verify(signature)) {
+                        if (notFoundKeys.contains(signature.getKeyID()) || !onePassSignature.verify(signature)) {
 
                             verified = false;
-
-                            // adding to invalid verifiers list
-                            invalidVerifiers.add(KeyManagement.GetKeyOwnerInfo(signature.getKeyID()));
 
                         }
                         else {
@@ -367,7 +364,7 @@ public class MessageManagement
 
                 System.out.println("Decrypted message: " + finalMessage);
                 System.out.println("Users verified: " + validVerifiers.toString());
-                System.out.println("Users failed to verify: " + invalidVerifiers.toString());
+                System.out.println("Not found keys: " + notFoundKeys.toString());
                 if (verified)
                     System.out.println("Message verified!");
                 else

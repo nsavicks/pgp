@@ -185,8 +185,10 @@ public class KeyManagement
 
     public static String GetKeyOwnerInfo(long keyID) throws PGPException {
 
-        return publicKeyRings.getPublicKeyRing(keyID).getPublicKey().getUserIDs().next();
-
+        if (publicKeyRings.getPublicKeyRing(keyID) != null)
+            return publicKeyRings.getPublicKeyRing(keyID).getPublicKey().getUserIDs().next();
+        else
+            return null;
     }
 
     private static KeyPair generateKeyPair(String algorithm, int keySize) throws NoSuchProviderException, NoSuchAlgorithmException
