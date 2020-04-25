@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="bctest-jdk15on-165">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/bctest-jdk15on-165.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/bcpg-jdk15on-165.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
