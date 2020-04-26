@@ -61,4 +61,10 @@ public class KeyModel
     {
         this.keyRing = keyRing;
     }
+
+    @Override
+    public String toString()
+    {
+        return name + " " + email + " " + keyID;
+    }
 }

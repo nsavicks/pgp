@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0deffce8-8d40-428b-b4a4-531730fafb3c" name="Default Changelist" comment="Added AES128 class">
       <change beforePath="$PROJECT_DIR$/src/gui/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/models/KeyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/models/KeyModel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,18 +14,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="188" column="86" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
+            <state relative-caret-position="301">
+              <caret line="191" column="48" selection-start-line="191" selection-start-column="48" selection-end-line="191" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#CreateMainScene#0;class#MainApplication#0" />
+                <element signature="class#3309:4658" />
                 <element signature="method#ShowError#0;class#MainApplication#0" />
                 <element signature="method#UpdateTableView#0;class#MainApplication#0" />
-                <element signature="e#5897#5898#0" expanded="true" />
-                <element signature="e#5925#5926#0" expanded="true" />
+                <element signature="method#getAllPublicKeys#0;class#MainApplication#0" />
+                <element signature="method#getAllPrivateKeys#0;class#MainApplication#0" />
               </folding>
             </state>
           </provider>
@@ -33,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
+            <state relative-caret-position="1564">
               <caret line="205" column="49" selection-start-line="205" selection-start-column="49" selection-end-line="205" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -43,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/models/KeyModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+            <state relative-caret-position="418">
+              <caret line="67" column="48" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
               <folding>
                 <element signature="e#445#446#0" expanded="true" />
                 <element signature="e#472#473#0" expanded="true" />
@@ -65,6 +66,8 @@
                 <element signature="e#908#909#0" expanded="true" />
                 <element signature="e#962#963#0" expanded="true" />
                 <element signature="e#1000#1001#0" expanded="true" />
+                <element signature="e#1050#1051#0" expanded="true" />
+                <element signature="e#1104#1105#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,8 +111,8 @@
         <option value="$PROJECT_DIR$/src/pgp/KeyManagement.java" />
         <option value="$PROJECT_DIR$/src/pgp/MessageManagement.java" />
         <option value="$PROJECT_DIR$/src/tests/MessageManagementTest.java" />
-        <option value="$PROJECT_DIR$/src/gui/models/KeyModel.java" />
         <option value="$PROJECT_DIR$/src/gui/MainApplication.java" />
+        <option value="$PROJECT_DIR$/src/gui/models/KeyModel.java" />
       </list>
     </option>
   </component>
@@ -127,6 +130,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,6 +148,19 @@
               <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
               <item name="pgp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pgp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pgp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pgp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -153,8 +171,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,6 +289,7 @@
       <workItem from="1587836075457" duration="11779000" />
       <workItem from="1587855149248" duration="4228000" />
       <workItem from="1587861755729" duration="2027000" />
+      <workItem from="1587907218206" duration="429000" />
     </task>
     <task id="LOCAL-00001" summary="Added AES128 class">
       <created>1587653202174</created>
@@ -285,13 +302,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59011000" />
+    <option name="totallyTimeSpent" value="59440000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21879195" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22214764" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -300,7 +317,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26770538" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26770538" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.42634562" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -694,23 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgp/KeyManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="181" column="44" selection-start-line="181" selection-start-column="44" selection-end-line="181" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#GenerateKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ExportPublicKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ExportSecretKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ImportKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#RemovePublicKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#RemoveSecretKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#generateKeyPair#0;class#KeyManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" />
     <entry file="file://$PROJECT_DIR$/src/tests/KeyManagementTest.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -743,10 +743,55 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/crypto/DSA.java" />
+    <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="205" column="49" selection-start-line="205" selection-start-column="49" selection-end-line="205" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#SendMessage#0;class#MessageManagement#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pgp/KeyManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="179" column="4" selection-start-line="179" selection-start-column="4" selection-end-line="179" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#GenerateKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#ExportPublicKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#ExportSecretKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#ImportKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#RemovePublicKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#RemoveSecretKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#GetSecretKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#GetPublicKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#generateKeyPair#0;class#KeyManagement#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="191" column="48" selection-start-line="191" selection-start-column="48" selection-end-line="191" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#3309:4658" />
+            <element signature="method#ShowError#0;class#MainApplication#0" />
+            <element signature="method#UpdateTableView#0;class#MainApplication#0" />
+            <element signature="method#getAllPublicKeys#0;class#MainApplication#0" />
+            <element signature="method#getAllPrivateKeys#0;class#MainApplication#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/models/KeyModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        <state relative-caret-position="418">
+          <caret line="67" column="48" selection-start-line="67" selection-start-column="48" selection-end-line="67" selection-end-column="48" />
           <folding>
             <element signature="e#445#446#0" expanded="true" />
             <element signature="e#472#473#0" expanded="true" />
@@ -764,32 +809,8 @@
             <element signature="e#908#909#0" expanded="true" />
             <element signature="e#962#963#0" expanded="true" />
             <element signature="e#1000#1001#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="205" column="49" selection-start-line="205" selection-start-column="49" selection-end-line="205" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#SendMessage#0;class#MessageManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="188" column="86" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#CreateMainScene#0;class#MainApplication#0" />
-            <element signature="method#ShowError#0;class#MainApplication#0" />
-            <element signature="method#UpdateTableView#0;class#MainApplication#0" />
-            <element signature="e#5897#5898#0" expanded="true" />
-            <element signature="e#5925#5926#0" expanded="true" />
+            <element signature="e#1050#1051#0" expanded="true" />
+            <element signature="e#1104#1105#0" expanded="true" />
           </folding>
         </state>
       </provider>

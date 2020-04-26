@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class MainApplication extends Application
 {
@@ -184,9 +186,10 @@ public class MainApplication extends Application
 
 
         // Signing
+        List<KeyModel> privateKeys = getAllPrivateKeys();
         CheckBox signCb = new CheckBox("Sign");
         ComboBox privateKeyCb = new ComboBox();
-        privateKeyCb.getItems().add("nebojsa <nebojsa@nebojsa.com> ASDASWDSADASDASD");
+        privateKeyCb.getItems().addAll(privateKeys);
         TextField tfPassword = new TextField();
 
         // Compress
@@ -195,7 +198,10 @@ public class MainApplication extends Application
         // Radix64
         CheckBox radixCb = new CheckBox("Radix-64 Encode");
 
-        sendVbox.getChildren().addAll(encryptCb, algorithmCb, signCb, privateKeyCb, tfPassword, compressCb, radixCb);
+        // Send Message
+        Button sendButton = new Button("Send Message");
+
+        sendVbox.getChildren().addAll(encryptCb, algorithmCb, signCb, privateKeyCb, tfPassword, compressCb, radixCb, sendButton);
 
         TitledPane sendPane = new TitledPane("Send Message", sendVbox);
 
@@ -222,6 +228,18 @@ public class MainApplication extends Application
 
         tableView.getItems().clear();
 
+        List<KeyModel> publicKeys = getAllPublicKeys();
+        List<KeyModel> privateKeys = getAllPrivateKeys();
+
+        tableView.getItems().addAll(publicKeys);
+        tableView.getItems().addAll(privateKeys);
+
+    }
+
+    private List<KeyModel> getAllPublicKeys(){
+
+        List<KeyModel> list = new ArrayList<>();
+
         Iterator<PGPPublicKeyRing> iterator = KeyManagement.publicKeyRings.getKeyRings();
 
         while (iterator.hasNext()){
@@ -234,25 +252,35 @@ public class MainApplication extends Application
 
             KeyModel keyModel = new KeyModel(userID[0], userID[1], keyID, pgpPublicKeyRing);
 
-            tableView.getItems().add(keyModel);
+            list.add(keyModel);
 
         }
 
-        Iterator<PGPSecretKeyRing> iteratorSecret = KeyManagement.secretKeyRings.getKeyRings();
+        return list;
 
-        while (iteratorSecret.hasNext()){
+    }
 
-            PGPSecretKeyRing pgpSecretKey = iteratorSecret.next();
+    private List<KeyModel> getAllPrivateKeys(){
 
-            String userID[] = pgpSecretKey.getPublicKey().getUserIDs().next().split(" ");
+        List<KeyModel> list = new ArrayList<>();
 
-            String keyID = Long.toHexString(pgpSecretKey.getPublicKey().getKeyID()).toUpperCase();
+        Iterator<PGPSecretKeyRing> iterator = KeyManagement.secretKeyRings.getKeyRings();
 
-            KeyModel keyModel = new KeyModel(userID[0], userID[1], keyID, pgpSecretKey);
+        while (iterator.hasNext()){
 
-            tableView.getItems().add(keyModel);
+            PGPSecretKeyRing pgpSecretKeyRing = iterator.next();
+
+            String userID[] = pgpSecretKeyRing.getPublicKey().getUserIDs().next().split(" ");
+
+            String keyID = Long.toHexString(pgpSecretKeyRing.getPublicKey().getKeyID()).toUpperCase();
+
+            KeyModel keyModel = new KeyModel(userID[0], userID[1], keyID, pgpSecretKeyRing);
+
+            list.add(keyModel);
 
         }
+
+        return list;
 
     }
 
