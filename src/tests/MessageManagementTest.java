@@ -20,11 +20,11 @@ public class MessageManagementTest
     public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchProviderException, PGPException, IOException, SignatureException
     {
 
-        File f = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\privatekey.asc");
+        File f = new File("C:\\Users\\Nebojsa\\Desktop\\secret.asc");
 
-        File f2 = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\publickey.asc");
+        File f2 = new File("C:\\Users\\Nebojsa\\Desktop\\public.asc");
 
-        File f3 = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\poruka.txt");
+        File f3 = new File("C:\\Users\\Nebojsa\\Desktop\\poruka.txt");
 
 //        if (f3.exists()){
 //            f3.delete();
