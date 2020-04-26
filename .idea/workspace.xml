@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0deffce8-8d40-428b-b4a4-531730fafb3c" name="Default Changelist" comment="Added AES128 class">
-      <change afterPath="$PROJECT_DIR$/src/gui/MainApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gui/models/KeyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcpg_jdk15to18_165.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcprov_ext_jdk15to18_165.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/crypto/DSA.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/BCPGPDecryptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pgp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/pgp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/crypto/DSA.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pgp/MessageManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/MessageManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/MessageManagementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/MessageManagementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainApplication.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,15 +16,28 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+            <state relative-caret-position="180">
+              <caret line="188" column="86" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#CreateMainScene#0;class#MainApplication#0" />
-                <element signature="class#2257:3597" />
                 <element signature="method#ShowError#0;class#MainApplication#0" />
                 <element signature="method#UpdateTableView#0;class#MainApplication#0" />
+                <element signature="e#5897#5898#0" expanded="true" />
                 <element signature="e#5925#5926#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1290">
+              <caret line="205" column="49" selection-start-line="205" selection-start-column="49" selection-end-line="205" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#SendMessage#0;class#MessageManagement#0" />
               </folding>
             </state>
           </provider>
@@ -131,13 +127,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pgp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pgp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pgp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pgp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -148,6 +153,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -265,6 +272,7 @@
       <workItem from="1587764591165" duration="16677000" />
       <workItem from="1587836075457" duration="11779000" />
       <workItem from="1587855149248" duration="4228000" />
+      <workItem from="1587861755729" duration="2027000" />
     </task>
     <task id="LOCAL-00001" summary="Added AES128 class">
       <created>1587653202174</created>
@@ -277,13 +285,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56984000" />
+    <option name="totallyTimeSpent" value="59011000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21610738" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21879195" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -703,18 +711,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/BCPGPDecryptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="163" column="24" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1212#1213#0" expanded="true" />
-            <element signature="e#1253#1254#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" />
     <entry file="file://$PROJECT_DIR$/src/tests/KeyManagementTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
@@ -745,13 +742,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/crypto/DSA.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/crypto/DSA.java" />
     <entry file="file://$PROJECT_DIR$/src/gui/models/KeyModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -779,24 +770,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
+        <state relative-caret-position="1290">
           <caret line="205" column="49" selection-start-line="205" selection-start-column="49" selection-end-line="205" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#SendMessage#0;class#MessageManagement#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="188" column="86" selection-start-line="188" selection-start-column="86" selection-end-line="188" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#CreateMainScene#0;class#MainApplication#0" />
-            <element signature="class#2257:3597" />
             <element signature="method#ShowError#0;class#MainApplication#0" />
             <element signature="method#UpdateTableView#0;class#MainApplication#0" />
+            <element signature="e#5897#5898#0" expanded="true" />
             <element signature="e#5925#5926#0" expanded="true" />
           </folding>
         </state>

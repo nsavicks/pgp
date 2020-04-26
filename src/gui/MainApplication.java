@@ -3,6 +3,7 @@ package gui;
 import gui.models.KeyModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,7 +33,15 @@ public class MainApplication extends Application
     public void start(Stage primaryStage) throws Exception
     {
 
-        mainScene = CreateMainScene(primaryStage);
+        //mainScene = CreateMainScene(primaryStage);
+
+        TabPane tabPane = new TabPane();
+
+        tabPane.getTabs().add(CreateKeyTab(primaryStage));
+
+        tabPane.getTabs().add(CreateMessagesTab(primaryStage));
+
+        mainScene = new Scene(tabPane, 800, 400);
 
         primaryStage.setTitle("PGP");
         primaryStage.setScene(mainScene);
@@ -42,7 +51,7 @@ public class MainApplication extends Application
         primaryStage.show();
     }
 
-    private Scene CreateMainScene(Stage primaryStage){
+    private Tab CreateKeyTab(Stage primaryStage){
 
         VBox vBox = new VBox();
 
@@ -145,9 +154,59 @@ public class MainApplication extends Application
             }
         });
 
-        Scene scene = new Scene(vBox);
+        Tab keyTab = new Tab("Key Management", vBox);
+        keyTab.setClosable(false);
 
-        return scene;
+        return keyTab;
+
+    }
+
+    private Tab CreateMessagesTab(Stage primaryStage){
+
+        HBox hBox = new HBox();
+
+        hBox.setPadding(new Insets(10));
+
+        TextArea textArea = new TextArea();
+
+        textArea.setPrefRowCount(10);
+
+        hBox.getChildren().add(textArea);
+
+        VBox vBox = new VBox();
+
+        VBox sendVbox = new VBox();
+
+        // Encrypt
+        CheckBox encryptCb = new CheckBox("Encrypt");
+        ComboBox algorithmCb = new ComboBox();
+        algorithmCb.getItems().addAll("AES128", "3DES");
+
+
+        // Signing
+        CheckBox signCb = new CheckBox("Sign");
+        ComboBox privateKeyCb = new ComboBox();
+        privateKeyCb.getItems().add("nebojsa <nebojsa@nebojsa.com> ASDASWDSADASDASD");
+        TextField tfPassword = new TextField();
+
+        // Compress
+        CheckBox compressCb = new CheckBox("Compress");
+
+        // Radix64
+        CheckBox radixCb = new CheckBox("Radix-64 Encode");
+
+        sendVbox.getChildren().addAll(encryptCb, algorithmCb, signCb, privateKeyCb, tfPassword, compressCb, radixCb);
+
+        TitledPane sendPane = new TitledPane("Send Message", sendVbox);
+
+        vBox.getChildren().add(sendPane);
+
+        hBox.getChildren().add(vBox);
+
+        Tab tab = new Tab("Send / Recieve Messages", hBox);
+        tab.setClosable(false);
+
+        return tab;
 
     }
 
