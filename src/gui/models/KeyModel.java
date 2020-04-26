@@ -14,11 +14,16 @@ public class KeyModel
     private PGPKeyRing keyRing;
 
 
-    public KeyModel(String name, String email, String keyID, PGPKeyRing keyRing)
+    public KeyModel(PGPKeyRing keyRing)
     {
-        this.name = name;
-        this.email = email;
-        this.keyID = keyID;
+        String userID[] = keyRing.getPublicKey().getUserIDs().next().split(" ");
+
+        name = userID[0];
+
+        email = userID[1];
+
+        keyID = Long.toHexString(keyRing.getPublicKey().getKeyID()).toUpperCase();
+
         this.keyRing = keyRing;
     }
 

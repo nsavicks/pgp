@@ -1,7 +1,9 @@
 package pgp;
 
+import gui.models.KeyModel;
+import gui.models.MessageModel;
+import javafx.scene.control.TextInputDialog;
 import org.bouncycastle.bcpg.*;
-import org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
 import org.bouncycastle.openpgp.*;
 import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.operator.bc.*;
@@ -55,6 +57,10 @@ public class MessageManagement
         OutputStream encOut = null;
 
         if (encrypt){
+
+            if (publicKeys.size() == 0){
+                throw new PGPException("You must specify at least one public key for encryption.");
+            }
 
             JcePGPDataEncryptorBuilder dataEncryptorBuilder = new JcePGPDataEncryptorBuilder(algorithm);
             dataEncryptorBuilder.setWithIntegrityPacket(true);
@@ -116,7 +122,14 @@ public class MessageManagement
 
             signatureGenerator = new PGPSignatureGenerator(new JcaPGPContentSignerBuilder(PublicKeyAlgorithmTags.DSA, HashAlgorithmTags.SHA256));
 
-            PGPPrivateKey privateKey = secretKey.getSecretKey().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+            PGPPrivateKey privateKey = null;
+
+            try{
+                 privateKey = secretKey.getSecretKey().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+            }
+            catch (PGPException e){
+                throw new PGPException("Password incorrect!");
+            }
 
             signatureGenerator.init(PGPSignature.BINARY_DOCUMENT, privateKey);
 
@@ -139,7 +152,8 @@ public class MessageManagement
 
         writeFileToLiteralData(cmpOut, PGPLiteralDataGenerator.UTF8, tmpFile, new byte[16 * 1024], signatureGenerator);
 
-        signatureGenerator.generate().encode(cmpOut);
+        if (signatureGenerator != null)
+            signatureGenerator.generate().encode(cmpOut);
 
         cmpOut.close();
 
@@ -173,7 +187,8 @@ public class MessageManagement
             while ((len = in.read(buf)) > 0)
             {
                 literalOut.write(buf, 0, len);
-                signatureGenerator.update(buf, 0, len);
+                if (signatureGenerator != null)
+                    signatureGenerator.update(buf, 0, len);
             }
 
             literalOut.close();
@@ -193,9 +208,8 @@ public class MessageManagement
     }
 
 
-    public static boolean RecieveMessage(
-            File file,
-            String password
+    public static MessageModel RecieveMessage(
+            File file
     ) throws IOException, PGPException
     {
 
@@ -203,9 +217,11 @@ public class MessageManagement
         PGPOnePassSignatureList onePassSignatureList = null;
 
         // INFO DATA
+
         List<String> validVerifiers = new ArrayList<>();
         List<Long> notFoundKeys = new ArrayList<>();
         String finalMessage = null;
+        boolean signed = false;
 
         FileInputStream fileInputStream = null;
 
@@ -256,11 +272,31 @@ public class MessageManagement
                     // TODO provera da li je podrzan algoritam
 
                     // TODO password se unosi iz dialoga
-                    PGPPrivateKey privateKey = secretSubKey.extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
 
-                    InputStream plainStream = encryptedData.getDataStream(new BcPublicKeyDataDecryptorFactory(privateKey));
+                    TextInputDialog inputDialog = new TextInputDialog();
 
-                    factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(plainStream));
+                    KeyModel keyModel = new KeyModel(secretKeyRing);
+
+                    inputDialog.setContentText("Enter password for " + keyModel.toString());
+
+                    inputDialog.getEditor().setPromptText("Enter private key password");
+
+                    inputDialog.showAndWait();
+
+                    String password = inputDialog.getEditor().getText();
+
+                    try{
+
+                        PGPPrivateKey privateKey = secretSubKey.extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+
+                        InputStream plainStream = encryptedData.getDataStream(new BcPublicKeyDataDecryptorFactory(privateKey));
+
+                        factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(plainStream));
+
+                    }
+                    catch (PGPException e){
+                        throw new PGPException("Password for decrypting incorrect!");
+                    }
 
                 }
 
@@ -276,6 +312,8 @@ public class MessageManagement
                 }
 
                 if (packet instanceof PGPOnePassSignatureList){
+
+                    signed = true;
 
                     onePassSignatureList = (PGPOnePassSignatureList) packet;
 
@@ -319,12 +357,16 @@ public class MessageManagement
 
                     finalMessage = new String(buffer);
 
-                    for (int i = 0; i < onePassSignatureList.size(); i++) {
+                    if (onePassSignatureList != null){
 
-                        PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
+                        for (int i = 0; i < onePassSignatureList.size(); i++) {
 
-                        if (!notFoundKeys.contains(onePassSignature.getKeyID()))
-                            onePassSignature.update(buffer);
+                            PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
+
+                            if (!notFoundKeys.contains(onePassSignature.getKeyID()))
+                                onePassSignature.update(buffer);
+
+                        }
 
                     }
 
@@ -361,26 +403,27 @@ public class MessageManagement
         finally
         {
 
-            // WRITING INFO
-            if (finalMessage != ""){
-
-                System.out.println("Decrypted message: " + finalMessage);
-                System.out.println("Users verified: " + validVerifiers.toString());
-                System.out.println("Not found keys: " + notFoundKeys.toString());
-                if (verified)
-                    System.out.println("Message verified!");
-                else
-                    System.out.println("Message not verified");
-
-            }
-            else {
-                System.out.println("Message failed to decrypt");
-            }
+//            // WRITING INFO
+//            if (finalMessage != ""){
+//
+//                System.out.println("Decrypted message: " + finalMessage);
+//                System.out.println("Users verified: " + validVerifiers.toString());
+//                System.out.println("Not found keys: " + notFoundKeys.toString());
+//                if (verified)
+//                    System.out.println("Message verified!");
+//                else
+//                    System.out.println("Message not verified");
+//
+//            }
+//            else {
+//                System.out.println("Message failed to decrypt");
+//            }
 
             fileInputStream.close();
 
         }
-        return verified;
+
+        return new MessageModel(finalMessage, signed, verified, validVerifiers, notFoundKeys);
     }
 
 }
