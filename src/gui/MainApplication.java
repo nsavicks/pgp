@@ -449,6 +449,7 @@ public class MainApplication extends Application
         algorithmCb.setVisible(false);
         algorithmCb.getSelectionModel().selectFirst();
         publicKeysLv = new ListView<>();
+        publicKeysLv.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         publicKeysLv.managedProperty().bind(publicKeysLv.visibleProperty());
         publicKeysLv.visibleProperty().bind(encryptCb.selectedProperty());
