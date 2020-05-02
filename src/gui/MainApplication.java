@@ -1,51 +1,57 @@
 package gui;
 
-import com.sun.javafx.collections.ObservableListWrapper;
+import gui.helpers.NewKeyPairDialog;
+import gui.helpers.PasswordDialog;
 import gui.models.KeyModel;
 import gui.models.MessageModel;
+import gui.models.NewKeyPairModel;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.bouncycastle.bcpg.SymmetricKeyAlgorithmTags;
 import org.bouncycastle.openpgp.PGPException;
 import org.bouncycastle.openpgp.PGPKeyRing;
 import org.bouncycastle.openpgp.PGPPublicKeyRing;
 import org.bouncycastle.openpgp.PGPSecretKeyRing;
+import org.bouncycastle.util.encoders.Hex;
 import pgp.KeyManagement;
 import pgp.MessageManagement;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.SignatureException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class MainApplication extends Application
 {
-
     private Scene mainScene;
 
     private ObservableList<KeyModel> publicKeys;
 
     private ObservableList<KeyModel> privateKeys;
 
-    private TableView tableView;
+    private TableView tableViewPrivateKeys, tableViewPublicKeys;
 
     private ComboBox privateKeysCb;
 
@@ -55,14 +61,15 @@ public class MainApplication extends Application
     public void start(Stage primaryStage) throws Exception
     {
 
+        // to call static initialization of KeyManagement class
+        KeyManagement.initialize();
+
         TabPane tabPane = new TabPane();
 
         tabPane.getTabs().add(CreateKeyTab(primaryStage));
-
         tabPane.getTabs().add(CreateMessagesTab(primaryStage));
 
         publicKeys = FXCollections.observableArrayList();
-
         privateKeys = FXCollections.observableArrayList();
 
         publicKeys.addListener(new ListChangeListener<KeyModel>()
@@ -70,12 +77,7 @@ public class MainApplication extends Application
             @Override
             public void onChanged(Change<? extends KeyModel> c)
             {
-                tableView.getItems().clear();
-                tableView.getItems().addAll(privateKeys);
-                tableView.getItems().addAll(publicKeys);
-
-                publicKeysLv.getItems().clear();
-                publicKeysLv.getItems().addAll(publicKeys);
+                KeysListChanged();
             }
         });
 
@@ -84,82 +86,76 @@ public class MainApplication extends Application
             @Override
             public void onChanged(Change<? extends KeyModel> c)
             {
-                tableView.getItems().clear();
-                tableView.getItems().addAll(privateKeys);
-                tableView.getItems().addAll(publicKeys);
-
-                privateKeysCb.getItems().clear();
-                privateKeysCb.getItems().addAll(privateKeys);
-
+                KeysListChanged();
             }
         });
+
+        // adding to observable list
+        updatePublicAndPrivateObservableLists();
 
         mainScene = new Scene(tabPane, 800, 400);
 
         primaryStage.setTitle("PGP");
         primaryStage.setScene(mainScene);
-        primaryStage.setWidth(1200);
-        primaryStage.setHeight(800);
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(600);
         primaryStage.setResizable(false);
 
         primaryStage.show();
     }
 
+    private void KeysListChanged(){
+
+        tableViewPublicKeys.getItems().clear();
+        tableViewPrivateKeys.getItems().clear();
+
+        tableViewPrivateKeys.getItems().addAll(privateKeys);
+        tableViewPublicKeys.getItems().addAll(publicKeys);
+
+        publicKeysLv.getItems().clear();
+        publicKeysLv.getItems().addAll(publicKeys);
+
+        privateKeysCb.getItems().clear();
+        privateKeysCb.getItems().addAll(privateKeys);
+    }
+
     private Tab CreateKeyTab(Stage primaryStage){
 
         VBox vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(3);
 
         HBox hBox = new HBox();
 
         Button importButton = new Button("Import key");
+        Button generateNewKeyPairButton = new Button("Generate new key pair");
 
+        hBox.getChildren().add(generateNewKeyPairButton);
         hBox.getChildren().add(importButton);
 
+        hBox.setSpacing(10);
+
         vBox.getChildren().add(hBox);
+        vBox.setMargin(hBox, new Insets(10, 0, 0, 0));
 
-        tableView = new TableView();
+        tableViewPrivateKeys = new TableView();
+        tableViewPublicKeys = new TableView();
 
-        TableColumn<String, KeyModel> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        Label privateKeysLabel, publicKeysLabel;
 
-        TableColumn<String, KeyModel> emailColumn = new TableColumn<>("E-mail");
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        publicKeysLabel = new Label("PUBLIC KEYS");
+        publicKeysLabel.setLabelFor(tableViewPublicKeys);
+        publicKeysLabel.setFont(new Font(20));
 
-        TableColumn<String, KeyModel> keyIDColumn = new TableColumn<>("Key ID");
-        keyIDColumn.setCellValueFactory(new PropertyValueFactory<>("keyID"));
+        privateKeysLabel = new Label("PRIVATE KEYS");
+        privateKeysLabel.setLabelFor(tableViewPrivateKeys);
+        privateKeysLabel.setFont(new Font(20));
 
-        tableView.getColumns().add(nameColumn);
-        tableView.getColumns().add(emailColumn);
-        tableView.getColumns().add(keyIDColumn);
+        vBox.getChildren().add(publicKeysLabel);
+        CreateTableView(vBox, tableViewPublicKeys, true, primaryStage);
 
-        tableView.setRowFactory(tv -> {
-
-            TableRow<KeyModel> row = new TableRow<>();
-
-            row.setOnMouseClicked(new EventHandler<MouseEvent>()
-            {
-                @Override
-                public void handle(MouseEvent event)
-                {
-                    if (event.getButton() == MouseButton.SECONDARY){
-
-                        ContextMenu contextMenu = new ContextMenu();
-                        MenuItem exportKey = new MenuItem("Export key");
-                        MenuItem expotSecretKey = new MenuItem("Export secret key");
-
-                        contextMenu.getItems().add(exportKey);
-                        contextMenu.getItems().add(expotSecretKey);
-
-                        contextMenu.show(primaryStage, event.getScreenX(), event.getScreenY());
-
-                    }
-                }
-            });
-
-            return row;
-        });
-
-        vBox.getChildren().add(tableView);
+        vBox.getChildren().add(privateKeysLabel);
+        CreateTableView(vBox, tableViewPrivateKeys, false, primaryStage);
 
         importButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
@@ -213,12 +209,221 @@ public class MainApplication extends Application
             }
         });
 
+        generateNewKeyPairButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                NewKeyPairDialog dialog = new NewKeyPairDialog();
+
+                Optional<NewKeyPairModel> optNewKeyPairModel = dialog.showAndWait();
+
+                if (optNewKeyPairModel.isPresent()){
+                    NewKeyPairModel newKeyPairModel = optNewKeyPairModel.get();
+                    try {
+                        if (newKeyPairModel.getEmail().equals("") || newKeyPairModel.getName().equals("") || newKeyPairModel.getPassword().equals("")){
+                            throw new PGPException("You need to fill name, email and password");
+                        }
+                        KeyManagement.GenerateKeyRing(
+                                newKeyPairModel.getName(),
+                                newKeyPairModel.getEmail(),
+                                newKeyPairModel.getPassword(),
+                                newKeyPairModel.getSizeDSA(),
+                                newKeyPairModel.isElGamal(),
+                                newKeyPairModel.getSizeElGamal()
+                                );
+                        updatePublicAndPrivateObservableLists();
+                    } catch (Exception e) {
+                        ShowError(e.getMessage());
+                    }
+                }
+
+            }
+        });
+
         Tab keyTab = new Tab("Key Management", vBox);
         keyTab.setClosable(false);
 
-
         return keyTab;
 
+    }
+
+    private void updatePublicAndPrivateObservableLists(){
+
+        publicKeys.clear();
+        privateKeys.clear();
+
+        Iterator<PGPPublicKeyRing> publicKeyRingIterator = KeyManagement.publicKeyRings.getKeyRings();
+        while (publicKeyRingIterator.hasNext()){
+            PGPPublicKeyRing publicKeyRing = publicKeyRingIterator.next();
+            publicKeys.add(new KeyModel(publicKeyRing));
+        }
+
+        // adding to observable list
+        Iterator<PGPSecretKeyRing> secretKeyRingIterator = KeyManagement.secretKeyRings.getKeyRings();
+        while (secretKeyRingIterator.hasNext()){
+            PGPSecretKeyRing secretKeyRing = secretKeyRingIterator.next();
+            privateKeys.add(new KeyModel(secretKeyRing));
+        }
+    }
+
+    private void CreateTableView(VBox vBox, TableView tableView, boolean isPublic, Stage primaryStage){
+        TableColumn<String, KeyModel> nameColumn = new TableColumn<>("Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.prefWidthProperty().bind(tableView.widthProperty().divide(5));
+
+        TableColumn<String, KeyModel> emailColumn = new TableColumn<>("E-mail");
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        emailColumn.prefWidthProperty().bind(tableView.widthProperty().divide(3));
+
+        TableColumn<String, KeyModel> keyIDColumn = new TableColumn<>("Key ID");
+        keyIDColumn.setCellValueFactory(new PropertyValueFactory<>("keyID"));
+        keyIDColumn.prefWidthProperty().bind(tableView.widthProperty().divide(2.14));
+
+        tableView.getColumns().add(nameColumn);
+        tableView.getColumns().add(emailColumn);
+        tableView.getColumns().add(keyIDColumn);
+
+        TableView finalTableView = tableView;
+        tableView.setRowFactory(tv -> {
+
+            TableRow<KeyModel> row = new TableRow<>();
+
+            row.setOnMouseClicked(new EventHandler<MouseEvent>()
+            {
+                @Override
+                public void handle(MouseEvent event)
+                {
+                    if (event.getButton() == MouseButton.SECONDARY){
+
+                        KeyModel selectedModel = (KeyModel) finalTableView.getSelectionModel().getSelectedItem();
+
+                        PGPSecretKeyRing secretKeyRing = null;
+                        PGPPublicKeyRing publicKeyRing = null;
+
+                        if (isPublic){
+                            publicKeyRing = (PGPPublicKeyRing) selectedModel.getKeyRing();
+                        }
+                        else {
+                            secretKeyRing = (PGPSecretKeyRing) selectedModel.getKeyRing();
+                        }
+
+                        ContextMenu contextMenu = new ContextMenu();
+
+                        MenuItem exportKey = new MenuItem("Export key");
+                        MenuItem deleteKey = new MenuItem("Delete key");
+
+                        contextMenu.getItems().add(exportKey);
+                        contextMenu.getItems().add(deleteKey);
+
+                        PGPPublicKeyRing finalPublicKeyRing = publicKeyRing;
+                        PGPSecretKeyRing finalSecretKeyRing = secretKeyRing;
+                        exportKey.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent actionEvent) {
+                                String fingerPrint = "";
+                                byte [] bytes;
+                                if (isPublic){
+                                    bytes = finalPublicKeyRing.getPublicKey().getFingerprint();
+                                }
+                                else {
+                                    bytes = finalSecretKeyRing.getPublicKey().getFingerprint();
+                                }
+
+                                fingerPrint = Hex.toHexString(bytes).toUpperCase();
+
+                                FileChooser fileChooser = new FileChooser();
+
+                                fileChooser.setInitialFileName(fingerPrint + ".asc");
+                                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("ASC files", "*.asc"));
+
+                                File file = fileChooser.showSaveDialog(primaryStage);
+
+                                if (file != null){
+                                    FileOutputStream fileOutputStream = null;
+                                    try {
+                                        fileOutputStream = new FileOutputStream(file);
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (isPublic){
+                                        try {
+                                            KeyManagement.ExportPublicKeyRing(finalPublicKeyRing, fileOutputStream, true);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    else {
+                                        try {
+                                            KeyManagement.ExportSecretKeyRing(finalSecretKeyRing, fileOutputStream, true);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    try {
+                                        fileOutputStream.close();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        });
+
+
+                        deleteKey.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent actionEvent) {
+                                if (isPublic){
+                                    try {
+                                        KeyManagement.RemovePublicKeyRing(selectedModel.getKeyRing().getPublicKey().getKeyID());
+                                        removeFromPublicObservableList(selectedModel.getKeyRing().getPublicKey().getKeyID());
+                                    } catch (PGPException e) {
+                                        ShowError(e.getMessage() );
+                                    }
+                                }
+                                else {
+
+                                    PasswordDialog dialog = new PasswordDialog();
+
+                                    Optional<String> password = dialog.showAndWait();
+
+                                    if (password.isPresent()) {
+                                        try {
+                                            KeyManagement.RemoveSecretKeyRing(selectedModel.getKeyRing().getPublicKey().getKeyID(), password.get());
+                                            removeFromSecretObservableList(selectedModel.getKeyRing().getPublicKey().getKeyID());
+                                        } catch (PGPException e) {
+                                            ShowError("Wrong password!");
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
+                        contextMenu.show(primaryStage, event.getScreenX(), event.getScreenY());
+                    }
+                }
+            });
+
+            return row;
+        });
+
+
+        vBox.getChildren().add(tableView);
+    }
+
+    private void removeFromPublicObservableList(long keyID){
+        for (KeyModel keyModel: publicKeys){
+            if (keyModel.getKeyRing().getPublicKey().getKeyID() == keyID){
+                publicKeys.remove(keyModel);
+                return;
+            }
+        }
+    }
+    private void removeFromSecretObservableList(long keyID){
+        for (KeyModel keyModel: privateKeys){
+            if (keyModel.getKeyRing().getPublicKey().getKeyID() == keyID){
+                privateKeys.remove(keyModel);
+                return;
+            }
+        }
     }
 
     private Tab CreateMessagesTab(Stage primaryStage){
@@ -382,7 +587,7 @@ public class MainApplication extends Application
                     MessageModel message = null;
 
                     if (file != null)
-                        message = MessageManagement.RecieveMessage(file);
+                        message = MessageManagement.ReceiveMessage(file);
 
                     if (message != null){
 
@@ -440,5 +645,12 @@ public class MainApplication extends Application
     public static void main(String[] args)
     {
         launch(args);
+    }
+
+    @Override
+    public void stop() throws Exception {
+        KeyManagement.SaveAfterExit();
+        System.out.println("Saving to init.asc file");
+        super.stop();
     }
 }

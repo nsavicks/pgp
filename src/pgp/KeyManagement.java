@@ -15,13 +15,13 @@ import org.bouncycastle.openpgp.operator.PGPDigestCalculator;
 import org.bouncycastle.openpgp.operator.bc.BcPGPKeyPair;
 import org.bouncycastle.openpgp.operator.jcajce.*;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.security.*;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public class KeyManagement
 {
@@ -31,6 +31,7 @@ public class KeyManagement
     public static PGPSecretKeyRingCollection secretKeyRings;
 
     static {
+        FileInputStream fileInputStream = null;
         try
         {
 
@@ -40,12 +41,60 @@ public class KeyManagement
 
             secretKeyRings = new JcaPGPSecretKeyRingCollection(new ArrayList<>());
 
+            File f = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\pgp\\init.asc");
+            fileInputStream = new FileInputStream(f);
+
+            initializeFromFile(fileInputStream);
 
         } catch (IOException | PGPException e)
         {
             e.printStackTrace();
         }
+        finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
+    }
+
+    private static void initializeFromFile(FileInputStream inputStream) throws IOException {
+        // importing keys from init.asc file
+        ImportKeyRings(inputStream);
+    }
+
+    public static void SaveAfterExit() throws IOException {
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream(new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\pgp\\init.asc"))) {
+            SaveToFile(fileOutputStream);
+        } catch (PGPException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void SaveToFile(FileOutputStream out) throws PGPException, IOException {
+        ArmoredOutputStream armoredOutputStream = new ArmoredOutputStream(out);
+
+        // exporting public keys
+        Iterator<PGPPublicKeyRing> publicKeyRingIterator = publicKeyRings.getKeyRings();
+
+        while (publicKeyRingIterator.hasNext()){
+            PGPPublicKeyRing publicKeyRing = publicKeyRingIterator.next();
+            publicKeyRing.encode(armoredOutputStream);
+        }
+
+        // exporting private keys
+        Iterator<PGPSecretKeyRing> secretKeyRingIterator = secretKeyRings.getKeyRings();
+        while (secretKeyRingIterator.hasNext()){
+            PGPSecretKeyRing secretKeyRing = secretKeyRingIterator.next();
+            secretKeyRing.encode(armoredOutputStream);
+        }
+
+        armoredOutputStream.close();
     }
 
     public static void GenerateKeyRing(String name, String email, String password, int dsaKeySize, boolean elgamal, int elgamalKeySize) throws NoSuchProviderException, NoSuchAlgorithmException, PGPException
@@ -85,6 +134,10 @@ public class KeyManagement
 
     }
 
+    public static void initialize(){
+
+    }
+
     public static void ExportPublicKeyRing(PGPPublicKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
     {
 
@@ -113,6 +166,29 @@ public class KeyManagement
 
     }
 
+    public static void ImportKeyRings(FileInputStream in) throws IOException {
+
+        BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(in));
+
+        while (true) {
+            Object o = factory.nextObject();
+
+            if (o == null)
+                break;
+
+            if (o instanceof PGPPublicKeyRing) {
+
+                publicKeyRings = JcaPGPPublicKeyRingCollection.addPublicKeyRing(publicKeyRings, (PGPPublicKeyRing) o);
+
+            } else if (o instanceof PGPSecretKeyRing) {
+
+                secretKeyRings = JcaPGPSecretKeyRingCollection.addSecretKeyRing(secretKeyRings, (PGPSecretKeyRing) o);
+                // TODO Import public key ring???
+            }
+        }
+
+    }
+
     public static PGPKeyRing ImportKeyRing(FileInputStream in) throws IOException
     {
 
@@ -128,12 +204,9 @@ public class KeyManagement
         else if (o instanceof PGPSecretKeyRing){
 
             secretKeyRings = JcaPGPSecretKeyRingCollection.addSecretKeyRing(secretKeyRings, (PGPSecretKeyRing) o);
-            // TODO Import publick key ring???
+            // TODO Import public key ring???
 
         }
-
-
-
 
         return (PGPKeyRing) o;
 

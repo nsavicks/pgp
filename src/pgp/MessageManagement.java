@@ -208,7 +208,7 @@ public class MessageManagement
     }
 
 
-    public static MessageModel RecieveMessage(
+    public static MessageModel ReceiveMessage(
             File file
     ) throws IOException, PGPException
     {
