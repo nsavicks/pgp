@@ -235,6 +235,8 @@ public class MessageManagement
         String finalMessage = null;
         boolean signed = false;
 
+        byte[] buffer = null;
+
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
 
             BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(fileInputStream));
@@ -248,8 +250,6 @@ public class MessageManagement
                 if (packet == null) break;
 
                 if (packet instanceof PGPEncryptedDataList) {
-
-                    // TRAZI PRIVATEKEY I PASSWORD
 
                     PGPEncryptedDataList encryptedDataList = (PGPEncryptedDataList) packet;
 
@@ -359,7 +359,7 @@ public class MessageManagement
 
                     InputStream rawData = literalData.getInputStream();
 
-                    byte[] buffer = new byte[rawData.available()];
+                    buffer = new byte[rawData.available()];
 
                     rawData.read(buffer);
 
@@ -407,6 +407,8 @@ public class MessageManagement
 
                             signature.init(new BcPGPContentVerifierBuilderProvider(), publicKeyRing.getPublicKey());
 
+                            signature.update(buffer);
+
                             if (!signature.verify()){
                                 verified = false;
                             }
@@ -438,6 +440,73 @@ public class MessageManagement
 //            else {
 //                System.out.println("Message failed to decrypt");
 //            }
+
+        return new MessageModel(finalMessage, signed, verified, validVerifiers, notFoundKeys);
+    }
+
+    public static MessageModel ReceiveDetachedMessage(
+            File signFile,
+            File messageFile
+    ) throws IOException, PGPException
+    {
+        boolean verified = true;
+        PGPOnePassSignatureList onePassSignatureList = null;
+
+        // INFO DATA
+
+        List<String> validVerifiers = new ArrayList<>();
+        List<Long> notFoundKeys = new ArrayList<>();
+        String finalMessage = null;
+        boolean signed = false;
+
+        byte[] buffer = null;
+
+        try (FileInputStream fileInputStream = new FileInputStream(messageFile)) {
+            buffer = fileInputStream.readAllBytes();
+        }
+
+        try (FileInputStream fileInputStream = new FileInputStream(signFile)) {
+
+            BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(fileInputStream));
+            Object packet = null;
+            while (true) {
+
+                packet = factory.nextObject();
+
+                if (packet == null) break;
+
+                if (packet instanceof PGPSignatureList) {
+
+                    PGPSignatureList signatureList = (PGPSignatureList) packet;
+
+                    for (int i = 0; i < signatureList.size(); i++) {
+
+                        PGPSignature signature = signatureList.get(i);
+
+                        PGPPublicKeyRing publicKeyRing = KeyManagement.GetPublicKeyRing(signature.getKeyID());
+
+                        if (publicKeyRing == null){
+                            throw new PGPException("Public key for verification not found.");
+                        }
+
+                        signature.init(new BcPGPContentVerifierBuilderProvider(), publicKeyRing.getPublicKey());
+                        
+                        signature.update(buffer);
+
+                        if (!signature.verify()){
+                            verified = false;
+                        }
+                        else{
+                            validVerifiers.add(KeyManagement.GetKeyOwnerInfo(publicKeyRing.getPublicKey().getKeyID()));
+                        }
+                    }
+                }
+                else {
+                    throw new PGPException("Sign file doesn't contain only PGPSignatureList packets.");
+                }
+            }
+
+        }
 
         return new MessageModel(finalMessage, signed, verified, validVerifiers, notFoundKeys);
     }

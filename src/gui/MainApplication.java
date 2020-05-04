@@ -579,7 +579,7 @@ public class MainApplication extends Application
             public void handle(MouseEvent event)
             {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SIG, PGP files", "*.sig", "*.pgp"));
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SIG, PGP and GPG files", "*.sig", "*.pgp", "*.gpg"));
 
                 File file = fileChooser.showOpenDialog(primaryStage);
 
@@ -587,9 +587,24 @@ public class MainApplication extends Application
 
                     MessageModel message = null;
 
-                    if (file != null)
-                        message = MessageManagement.ReceiveMessage(file);
+                    if (file != null) {
+                        if (file.getAbsolutePath().substring(file.getPath().lastIndexOf(".")).equals(".sig")){
 
+                            File messageFile = new File(file.getAbsolutePath().subSequence(0, file.getPath().lastIndexOf('.')).toString());
+
+                            if (!messageFile.exists()){
+                                throw new PGPException("Cannot find message file: " + messageFile.getAbsolutePath());
+                            }
+
+                            message = MessageManagement.ReceiveDetachedMessage(file, messageFile);
+
+                        }
+                        else {
+
+                            message = MessageManagement.ReceiveMessage(file);
+
+                        }
+                    }
                     if (message != null){
 
                         textArea.setText(message.getPlainText());
