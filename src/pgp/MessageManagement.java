@@ -6,6 +6,7 @@ import gui.models.MessageModel;
 import javafx.scene.control.TextInputDialog;
 import javafx.util.Pair;
 import org.bouncycastle.bcpg.*;
+import org.bouncycastle.jcajce.provider.asymmetric.DSA;
 import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jce.provider.JCEElGamalPublicKey;
@@ -27,6 +28,50 @@ import java.util.*;
 public class MessageManagement
 {
 
+
+    public static void OnlySignMessage(
+            String plaintext,
+            PGPSecretKeyRing secretKey,
+            int algorithm,
+            String password,
+            FileOutputStream fileOut
+    ) throws PGPException, IOException, SignatureException {
+
+        PGPSignatureGenerator signatureGenerator = new PGPSignatureGenerator(new BcPGPContentSignerBuilder(PublicKeyAlgorithmTags.DSA, HashAlgorithmTags.SHA256));
+        PGPSignature signature;
+        PGPPrivateKey privateKey = null;
+
+        try {
+            privateKey = secretKey.getSecretKey().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
+        } catch (PGPException e) {
+            throw new PGPException("Password incorrect!");
+        }
+
+        try {
+            signatureGenerator.init(PGPSignature.BINARY_DOCUMENT, privateKey);
+
+            PGPSignatureSubpacketGenerator subpacketGenerator = new PGPSignatureSubpacketGenerator();
+            subpacketGenerator.setSignerUserID(false, secretKey.getPublicKey().getUserIDs().next());
+            signatureGenerator.setHashedSubpackets(subpacketGenerator.generate());
+
+            signature = signatureGenerator.generate();
+
+            signature.encode(fileOut);
+        }
+        catch (IOException e) {
+            throw e;
+        }
+
+        File tmpFile = File.createTempFile("pgp", null);
+        FileWriter writer = new FileWriter(tmpFile);
+        writer.write(plaintext.toCharArray());
+        writer.close();
+
+        writeFileToLiteralData(fileOut, PGPLiteralDataGenerator.UTF8, tmpFile, new byte[16 * 1024], signatureGenerator);
+
+        signatureGenerator.generate().encode(fileOut);
+
+    }
 
     public static void SendMessage(
             String plaintext,

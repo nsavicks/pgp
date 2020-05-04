@@ -532,6 +532,16 @@ public class MainApplication extends Application
 
                         }
 
+//                        if (signCb.isSelected() && !encryptCb.isSelected()){
+//                            MessageManagement.OnlySignMessage(
+//                                    textArea.getText(),
+//                                    secretKey,
+//                                    alg,
+//                                    tfPassword.getText(),
+//                                    fileOutputStream
+//                            );
+//                        }
+//                        else {
                         MessageManagement.SendMessage(
                                 textArea.getText(),
                                 encryptCb.isSelected(),
@@ -544,7 +554,7 @@ public class MainApplication extends Application
                                 tfPassword.getText(),
                                 fileOutputStream
                         );
-
+//                        }
 
                     } catch (IOException | NoSuchAlgorithmException e)
                     {
