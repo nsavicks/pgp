@@ -1,9 +1,14 @@
 package pgp;
 
+import gui.helpers.SelectKeyDialog;
 import gui.models.KeyModel;
 import gui.models.MessageModel;
 import javafx.scene.control.TextInputDialog;
+import javafx.util.Pair;
 import org.bouncycastle.bcpg.*;
+import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.jce.provider.JCEElGamalPublicKey;
 import org.bouncycastle.openpgp.*;
 import org.bouncycastle.openpgp.bc.BcPGPObjectFactory;
 import org.bouncycastle.openpgp.operator.bc.*;
@@ -14,15 +19,14 @@ import javax.crypto.SecretKey;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.Security;
 import java.security.SignatureException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class MessageManagement
 {
+
 
     public static void SendMessage(
             String plaintext,
@@ -81,6 +85,10 @@ public class MessageManagement
                 Iterator<PGPPublicKey> it = publicKey.getPublicKeys();
 
                 PGPPublicKey masterKey = it.next();
+
+                if (!it.hasNext())
+                    throw new PGPException("Selected key doesn't have ElGamal subkey which is needed for encryption.");
+
                 PGPPublicKey subKey = it.next();
 
                 encryptedDataGenerator.addMethod(new JcePublicKeyKeyEncryptionMethodGenerator(subKey));
@@ -131,18 +139,22 @@ public class MessageManagement
                 throw new PGPException("Password incorrect!");
             }
 
-            signatureGenerator.init(PGPSignature.BINARY_DOCUMENT, privateKey);
+            try {
+                signatureGenerator.init(PGPSignature.BINARY_DOCUMENT, privateKey);
 
-            PGPSignatureSubpacketGenerator subpacketGenerator = new PGPSignatureSubpacketGenerator();
+                PGPSignatureSubpacketGenerator subpacketGenerator = new PGPSignatureSubpacketGenerator();
 
-            subpacketGenerator.setSignerUserID(false, secretKey.getPublicKey().getUserIDs().next());
+                subpacketGenerator.setSignerUserID(false, secretKey.getPublicKey().getUserIDs().next());
 
-            signatureGenerator.setHashedSubpackets(subpacketGenerator.generate());
+                signatureGenerator.setHashedSubpackets(subpacketGenerator.generate());
 
-            signature = signatureGenerator.generateOnePassVersion(false);
+                signature = signatureGenerator.generateOnePassVersion(false);
 
-            signature.encode(cmpOut);
-
+                signature.encode(cmpOut);
+            }
+            catch (Exception e){
+                throw e;
+            }
         }
 
         File tmpFile = File.createTempFile("pgp", null);
@@ -223,45 +235,59 @@ public class MessageManagement
         String finalMessage = null;
         boolean signed = false;
 
-        FileInputStream fileInputStream = null;
-
-        try{
-
-            fileInputStream = new FileInputStream(file);
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
 
             BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(fileInputStream));
 
             Object packet = null;
 
-            PGPSecretKeyRing secretKeyRing = null;
-
-            while (true){
+            while (true) {
 
                 packet = factory.nextObject();
 
                 if (packet == null) break;
 
-                if (packet instanceof PGPEncryptedDataList){
+                if (packet instanceof PGPEncryptedDataList) {
 
                     // TRAZI PRIVATEKEY I PASSWORD
 
                     PGPEncryptedDataList encryptedDataList = (PGPEncryptedDataList) packet;
 
-                    PGPPublicKeyEncryptedData encryptedData = null;
+                    List<PGPSecretKeyRing> secretKeyRings = new ArrayList<>();
+                    HashMap<Long, PGPPublicKeyEncryptedData> encryptedDataHashMap = new HashMap<>();
 
-                    for (int i = 0; i < encryptedDataList.size(); i++){
+                    for (int i = 0; i < encryptedDataList.size(); i++) {
 
-                        encryptedData = (PGPPublicKeyEncryptedData) encryptedDataList.get(i);
+                        PGPPublicKeyEncryptedData encryptedData = (PGPPublicKeyEncryptedData) encryptedDataList.get(i);
+                        PGPSecretKeyRing secretKeyRing = KeyManagement.GetSecretKeyRing(encryptedData.getKeyID());
 
-                        secretKeyRing = KeyManagement.GetSecretKeyRing(encryptedData.getKeyID());
-
-                        if (secretKeyRing != null) break;
-
+                        if (secretKeyRing != null) {
+                            secretKeyRings.add(secretKeyRing);
+                            encryptedDataHashMap.put(secretKeyRing.getPublicKey().getKeyID(), encryptedData);
+                        }
                     }
 
-                    if (secretKeyRing == null) throw new PGPException("Private key for decryption not found!");
+                    if (secretKeyRings.size() == 0) throw new PGPException("Private key for decryption not found!");
+                    
 
-                    Iterator<PGPSecretKey> iterator = secretKeyRing.getSecretKeys();
+                    // TODO provera da li je podrzan algoritam
+
+                    // TODO password se unosi iz dialoga
+
+                    SelectKeyDialog dialog = new SelectKeyDialog(secretKeyRings);
+
+                    Optional<Pair<KeyModel, String>> optionalPassword = dialog.showAndWait();
+
+                    if (!optionalPassword.isPresent())
+                        throw new PGPException("You need to select key");
+
+                    String password = optionalPassword.get().getValue();
+                    KeyModel keyModel = optionalPassword.get().getKey();
+
+                    PGPSecretKeyRing selectedSecretKeyRing = (PGPSecretKeyRing) keyModel.getKeyRing();
+                    PGPPublicKeyEncryptedData selectedEncryptedData = encryptedDataHashMap.get(selectedSecretKeyRing.getPublicKey().getKeyID());
+
+                    Iterator<PGPSecretKey> iterator = selectedSecretKeyRing.getSecretKeys();
 
                     PGPSecretKey masterSecretKey = iterator.next();
 
@@ -269,55 +295,38 @@ public class MessageManagement
 
                     PGPSecretKey secretSubKey = iterator.next();
 
-                    // TODO provera da li je podrzan algoritam
-
-                    // TODO password se unosi iz dialoga
-
-                    TextInputDialog inputDialog = new TextInputDialog();
-
-                    KeyModel keyModel = new KeyModel(secretKeyRing);
-
-                    inputDialog.setContentText("Enter password for " + keyModel.toString());
-
-                    inputDialog.getEditor().setPromptText("Enter private key password");
-
-                    inputDialog.showAndWait();
-
-                    String password = inputDialog.getEditor().getText();
-
-                    try{
+                    try {
 
                         PGPPrivateKey privateKey = secretSubKey.extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
 
-                        InputStream plainStream = encryptedData.getDataStream(new BcPublicKeyDataDecryptorFactory(privateKey));
+                        InputStream plainStream = selectedEncryptedData.getDataStream(new BcPublicKeyDataDecryptorFactory(privateKey));
 
                         factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(plainStream));
 
-                    }
-                    catch (PGPException e){
+                    } catch (PGPException e) {
                         throw new PGPException("Password for decrypting incorrect!");
                     }
 
                 }
 
-                if (packet instanceof PGPCompressedData){
+                if (packet instanceof PGPCompressedData) {
 
                     PGPCompressedData compressedData = (PGPCompressedData) packet;
 
                     //if (compressedData.getAlgorithm() != CompressionAlgorithmTags.ZIP)
-                        //throw new PGPException("Compression algorithm not supported! (Only ZIP algorithm is supported)");
+                    //throw new PGPException("Compression algorithm not supported! (Only ZIP algorithm is supported)");
 
                     factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(compressedData.getDataStream()));
 
                 }
 
-                if (packet instanceof PGPOnePassSignatureList){
+                if (packet instanceof PGPOnePassSignatureList) {
 
                     signed = true;
 
                     onePassSignatureList = (PGPOnePassSignatureList) packet;
 
-                    for (int i = 0; i < onePassSignatureList.size(); i++){
+                    for (int i = 0; i < onePassSignatureList.size(); i++) {
 
                         PGPOnePassSignature onePassSignature = onePassSignatureList.get(i);
 
@@ -325,12 +334,11 @@ public class MessageManagement
 
                         PGPPublicKeyRing signerPublicKeyRing = KeyManagement.GetPublicKeyRing(keyId);
 
-                        if (signerPublicKeyRing == null){
+                        if (signerPublicKeyRing == null) {
 
                             notFoundKeys.add(keyId);
 
-                        }
-                        else {
+                        } else {
 
                             PGPPublicKey signerPublicKey = signerPublicKeyRing.getPublicKey();
 
@@ -345,7 +353,7 @@ public class MessageManagement
 
                 }
 
-                if (packet instanceof PGPLiteralData){
+                if (packet instanceof PGPLiteralData) {
 
                     PGPLiteralData literalData = (PGPLiteralData) packet;
 
@@ -357,7 +365,7 @@ public class MessageManagement
 
                     finalMessage = new String(buffer);
 
-                    if (onePassSignatureList != null){
+                    if (onePassSignatureList != null) {
 
                         for (int i = 0; i < onePassSignatureList.size(); i++) {
 
@@ -371,8 +379,7 @@ public class MessageManagement
                     }
 
                 }
-
-                if (packet instanceof  PGPSignatureList) {
+                if (packet instanceof PGPSignatureList) {
 
                     PGPSignatureList signatureList = (PGPSignatureList) packet;
 
@@ -380,17 +387,32 @@ public class MessageManagement
 
                         PGPSignature signature = signatureList.get(i);
 
-                        PGPOnePassSignature onePassSignature = onePassSignatureList.get(onePassSignatureList.size() - i - 1);
+                        if (onePassSignatureList != null){
+                            PGPOnePassSignature onePassSignature = onePassSignatureList.get(onePassSignatureList.size() - i - 1);
 
-                        if (notFoundKeys.contains(signature.getKeyID()) || !onePassSignature.verify(signature)) {
-
-                            verified = false;
-
+                            if (notFoundKeys.contains(signature.getKeyID()) || !onePassSignature.verify(signature)) {
+                                verified = false;
+                            } else {
+                                // adding to valid verifiers list
+                                validVerifiers.add(KeyManagement.GetKeyOwnerInfo(signature.getKeyID()));
+                            }
                         }
                         else {
 
-                            // adding to valid verifiers list
-                            validVerifiers.add(KeyManagement.GetKeyOwnerInfo(signature.getKeyID()));
+                            PGPPublicKeyRing publicKeyRing = KeyManagement.GetPublicKeyRing(signature.getKeyID());
+
+                            if (publicKeyRing == null){
+                                throw new PGPException("Public key for verification not found.");
+                            }
+
+                            signature.init(new BcPGPContentVerifierBuilderProvider(), publicKeyRing.getPublicKey());
+
+                            if (!signature.verify()){
+                                verified = false;
+                            }
+                            else{
+                                validVerifiers.add(KeyManagement.GetKeyOwnerInfo(publicKeyRing.getPublicKey().getKeyID()));
+                            }
 
                         }
 
@@ -400,8 +422,6 @@ public class MessageManagement
             }
 
         }
-        finally
-        {
 
 //            // WRITING INFO
 //            if (finalMessage != ""){
@@ -418,10 +438,6 @@ public class MessageManagement
 //            else {
 //                System.out.println("Message failed to decrypt");
 //            }
-
-            fileInputStream.close();
-
-        }
 
         return new MessageModel(finalMessage, signed, verified, validVerifiers, notFoundKeys);
     }

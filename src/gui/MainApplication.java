@@ -462,7 +462,7 @@ public class MainApplication extends Application
         privateKeysCb = new ComboBox();
         privateKeysCb.setVisible(false);
         privateKeysCb.getSelectionModel().selectFirst();
-        TextField tfPassword = new TextField();
+        PasswordField tfPassword = new PasswordField();
         tfPassword.setPromptText("Private key password...");
 
         privateKeysCb.managedProperty().bind(privateKeysCb.visibleProperty());
@@ -480,7 +480,7 @@ public class MainApplication extends Application
         // Send Message
         Button sendButton = new Button("Send Message");
 
-        Button recieveButton = new Button("Recieve Message");
+        Button receiveButton = new Button("Receive Message");
         // Actions
 
         sendButton.setOnMouseClicked(new EventHandler<MouseEvent>()
@@ -573,13 +573,13 @@ public class MainApplication extends Application
             }
         });
 
-        recieveButton.setOnMouseClicked(new EventHandler<MouseEvent>()
+        receiveButton.setOnMouseClicked(new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent event)
             {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PGP file", "*.pgp"));
+                fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("SIG, PGP files", "*.sig", "*.pgp"));
 
                 File file = fileChooser.showOpenDialog(primaryStage);
 
@@ -618,7 +618,7 @@ public class MainApplication extends Application
 
         // Adding to tab view
 
-        sendVbox.getChildren().addAll(encryptCb, algorithmCb, publicKeysLv, signCb, privateKeysCb, tfPassword, compressCb, radixCb, sendButton, recieveButton);
+        sendVbox.getChildren().addAll(encryptCb, algorithmCb, publicKeysLv, signCb, privateKeysCb, tfPassword, compressCb, radixCb, sendButton, receiveButton);
 
         sendVbox.setSpacing(10);
 
@@ -628,7 +628,7 @@ public class MainApplication extends Application
 
         hBox.getChildren().add(vBox);
 
-        Tab tab = new Tab("Send / Recieve Messages", hBox);
+        Tab tab = new Tab("Send / Receive Messages", hBox);
         tab.setClosable(false);
 
         return tab;
@@ -651,7 +651,6 @@ public class MainApplication extends Application
     @Override
     public void stop() throws Exception {
         KeyManagement.SaveAfterExit();
-        System.out.println("Saving to init.asc file");
         super.stop();
     }
 }

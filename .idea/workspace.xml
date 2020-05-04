@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0deffce8-8d40-428b-b4a4-531730fafb3c" name="Default Changelist" comment="Added AES128 class">
+      <change afterPath="$PROJECT_DIR$/src/gui/helpers/SelectKeyDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/META-INF/pgp.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/1F3899EFFE1514B05E33365E0F9EF93A81B54477.asc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/filipPrivate.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/filipPublic.asc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$3.class" afterDir="false" />
@@ -21,57 +24,34 @@
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/KeyModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/models/KeyModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/MessageModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/models/MessageModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/NewKeyPairModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/gui/models/NewKeyPairModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/nebojsaPrivate.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/nebojsaPublic.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/out.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/init.asc" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/pgp/init.asc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgpexample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/poruka.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/1F3899EFFE1514B05E33365E0F9EF93A81B54477.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/D99633C2E7DC561E64B119C24CE19ABA7CADD193.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/filipPrivate.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/filipPublic.asc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nebojsaPrivate.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nebojsaPublic.asc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgp/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/KeyManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgp/MessageManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/MessageManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgp/init.asc" beforeDir="false" afterPath="$PROJECT_DIR$/src/pgp/init.asc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pgpexample.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/poruka.txt" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="452" lean-forward="true" selection-start-line="452" selection-end-line="452" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#start#0;class#MainApplication#0" />
-                <element signature="method#KeysListChanged#0;class#MainApplication#0" />
-                <element signature="method#CreateKeyTab#0;class#MainApplication#0" />
-                <element signature="method#updatePublicAndPrivateObservableLists#0;class#MainApplication#0" />
-                <element signature="method#CreateTableView#0;class#MainApplication#0" />
-                <element signature="method#removeFromPublicObservableList#0;class#MainApplication#0" />
-                <element signature="method#removeFromSecretObservableList#0;class#MainApplication#0" />
-                <element signature="e#23593#23594#0" expanded="true" />
-                <element signature="e#23621#23622#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1938">
-              <caret line="277" column="25" selection-start-line="277" selection-start-column="25" selection-end-line="277" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#SendMessage#0;class#MessageManagement#0" />
-                <element signature="method#writeFileToLiteralData#0;class#MessageManagement#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -80,110 +60,25 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>the message I want to encrypt</find>
-      <find>dialog</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/crypto/AES128.java" />
-        <option value="$PROJECT_DIR$/src/packets/PGPPacketHeader.java" />
-        <option value="$PROJECT_DIR$/src/AES128.java" />
-        <option value="$PROJECT_DIR$/src/pgptest.txt" />
-        <option value="$PROJECT_DIR$/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/KeyManagement.java" />
-        <option value="$PROJECT_DIR$/src/tests/KeyManagementTest.java" />
-        <option value="$PROJECT_DIR$/src/pgp/sadasd.java" />
-        <option value="$PROJECT_DIR$/src/pgp/BouncyCastlePGPTest.java" />
-        <option value="$PROJECT_DIR$/src/privatekey.asc" />
-        <option value="$PROJECT_DIR$/src/pgpexample.txt" />
-        <option value="$PROJECT_DIR$/src/tests/Test.java" />
-        <option value="$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/pgp/KeyManagement.java" />
-        <option value="$PROJECT_DIR$/src/gui/models/KeyModel.java" />
-        <option value="$PROJECT_DIR$/src/gui/models/MessageModel.java" />
-        <option value="$PROJECT_DIR$/src/tests/MessageManagementTest.java" />
-        <option value="$PROJECT_DIR$/src/pgp/MessageManagement.java" />
-        <option value="$PROJECT_DIR$/src/gui/MainApplication.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-60" />
-    <option name="y" value="40" />
-    <option name="width" value="1940" />
-    <option name="height" value="1050" />
-  </component>
+  <component name="ProjectId" id="1bPClGSRHGnjCB5ffvFkb5NP1Au" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pgp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pgp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1588435547886" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pgp" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -192,21 +87,12 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.excludes" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tf160077d\Desktop\zp\pgp\src\pgp" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Nebojsa\Desktop\pgp\src\pgp" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="BCPGPDecryptor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -302,6 +188,8 @@
       <workItem from="1588283149491" duration="39000" />
       <workItem from="1588435191399" duration="405000" />
       <workItem from="1588460772724" duration="252000" />
+      <workItem from="1588524561731" duration="3781000" />
+      <workItem from="1588593317437" duration="12064000" />
     </task>
     <task id="LOCAL-00001" summary="Added AES128 class">
       <created>1587653202174</created>
@@ -313,44 +201,6 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69740000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24228188" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26770538" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.42634562" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.19830029" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
-      <window_info anchor="right" id="Capture Analysis" order="7" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
-    </layout>
-  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -358,357 +208,98 @@
     <MESSAGE value="Added AES128 class" />
     <option name="LAST_COMMIT_MESSAGE" value="Added AES128 class" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="23" key="#Project_Structure" timestamp="1588461164883">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="23" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1588461164883" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588461294960">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1588461294960" />
+    <state x="531" y="253" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1588461180435">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="531" y="253" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1588461180435" />
+    <state x="438" y="67" key="#xdebugger.evaluate" timestamp="1588595878772">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="438" y="67" key="#xdebugger.evaluate/0.0.1366.728@0.0.1366.728" timestamp="1588595878772" />
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom" timestamp="1588614425335">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588614425335" />
+    <state width="1323" height="163" key="GridCell.Tab.0.center" timestamp="1588614425334">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588614425334" />
+    <state width="1323" height="163" key="GridCell.Tab.0.left" timestamp="1588614425334">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588614425334" />
+    <state width="1323" height="163" key="GridCell.Tab.0.right" timestamp="1588614425334">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588614425334" />
+    <state width="1323" height="163" key="GridCell.Tab.1.bottom" timestamp="1588614438707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588614438707" />
+    <state width="1323" height="163" key="GridCell.Tab.1.center" timestamp="1588614438707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1588614438707" />
+    <state width="1323" height="163" key="GridCell.Tab.1.left" timestamp="1588614438707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1588614438707" />
+    <state width="1323" height="163" key="GridCell.Tab.1.right" timestamp="1588614438707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1588614438707" />
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1588593401296">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="378" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1588593401296" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1588608881047">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1588608881047" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyEncryptedData.class</url>
           <line>46</line>
-          <properties />
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pgp/MessageManagement.java</url>
+          <line>240</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pgp/MessageManagement.java</url>
+          <line>283</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pgp/MessageManagement.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pgp/MessageManagement.java</url>
+          <line>401</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="o4" language="JAVA" />
+        <watch expression="signature" language="JAVA" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>o4</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>KeyManagement.secretKeyRings</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>KeyManagement</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-    <expressions id="evaluateExpression">
-      <expression>
-        <expression-string>it.next()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>factory.nextObject()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>((PGPSecretKeyRing)o).getPublicKey().getUserIDs().next().toString()</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.bouncycastle.openpgp.PGPSecretKeyRing,java.util.ArrayList</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>((PGPSecretKeyRing)o).getPublicKey().getUserIDs().next()</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.bouncycastle.openpgp.PGPSecretKeyRing,java.util.ArrayList</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>((PGPSecretKeyRing)o).getPublicKey().getUserIDs()</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>org.bouncycastle.openpgp.PGPSecretKeyRing,java.util.ArrayList</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/bcpg/SymmetricEncDataPacket.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/bcpg/SymmetricEncIntegrityPacket.class" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/security/KeyPairGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="275" column="35" selection-start-line="275" selection-start-column="35" selection-end-line="275" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyRingCollection.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/jcajce/JcaPGPSecretKeyRingCollection.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcprov-ext-jdk15to18-165.jar!/org/bouncycastle/jce/spec/ElGamalGenParameterSpec.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/jcajce/JcaPGPPublicKeyRingCollection.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPCompressedData.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyRing.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSecretKeyRing.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSecretKey.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/bcpg/SymmetricKeyAlgorithmTags.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/PublicKeyKeyEncryptionMethodGenerator.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcePublicKeyKeyEncryptionMethodGenerator.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcaPGPContentSignerBuilder.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSignatureGenerator.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSignatureList.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPLiteralDataGenerator.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/bc/BcPGPDataEncryptorBuilder.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPEncryptedDataGenerator.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyEncryptedData.class" />
-    <entry file="file://$PROJECT_DIR$/src/pgp/BouncyCastlePGPTest.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/security/SecureRandom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="466" column="16" selection-start-line="466" selection-start-column="16" selection-end-line="466" selection-end-column="16" />
-          <folding>
-            <element signature="e#16775#16776#0" expanded="true" />
-            <element signature="e#16829#16830#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPUtil.class" />
-    <entry file="file://$PROJECT_DIR$/src/pgp/sadasd.java" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSignature.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcePGPDataEncryptorBuilder.class" />
-    <entry file="file://$PROJECT_DIR$/src/privatekey.asc" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/bcpg/BCPGInputStream.class" />
-    <entry file="file://$PROJECT_DIR$/src/pgpexample.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/examples/ClearSignedFileProcessor.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPEncryptedData.class" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/jre/lib/rt.jar!/sun/misc/IOUtils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPOnePassSignature.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/examples/SignedFileProcessor.class" />
-    <entry file="file://$PROJECT_DIR$/src/out.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSecretKeyRingCollection.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPObjectFactory.class" />
-    <entry file="file://$PROJECT_DIR$/src/tests/BCPGPDecryptor.java" />
-    <entry file="file://$PROJECT_DIR$/src/tests/KeyManagementTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="27" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="48" column="86" selection-start-line="48" selection-start-column="86" selection-end-line="48" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/crypto/DSA.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/javafx/collections/FXCollections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="426" column="39" selection-start-line="426" selection-start-column="39" selection-end-line="426" selection-end-column="39" />
-          <folding>
-            <element signature="e#16228#16229#0" expanded="true" />
-            <element signature="e#16272#16273#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgp/KeyManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="115" column="24" lean-forward="true" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#GenerateKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ExportPublicKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ExportSecretKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#ImportKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#RemovePublicKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#RemoveSecretKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#GetSecretKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#GetPublicKeyRing#0;class#KeyManagement#0" />
-            <element signature="method#generateKeyPair#0;class#KeyManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/MessageManagementTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="60" column="10" selection-start-line="60" selection-start-column="10" selection-end-line="60" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="176" selection-start-line="176" selection-end-line="176" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/models/KeyModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-          <folding>
-            <element signature="e#756#757#0" expanded="true" />
-            <element signature="e#790#791#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgp/init.asc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-47" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/models/MessageModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-          <folding>
-            <element signature="e#1272#1273#0" expanded="true" />
-            <element signature="e#1307#1308#0" expanded="true" />
-            <element signature="e#1371#1372#0" expanded="true" />
-            <element signature="e#1419#1420#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/MainApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="452" lean-forward="true" selection-start-line="452" selection-end-line="452" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#start#0;class#MainApplication#0" />
-            <element signature="method#KeysListChanged#0;class#MainApplication#0" />
-            <element signature="method#CreateKeyTab#0;class#MainApplication#0" />
-            <element signature="method#updatePublicAndPrivateObservableLists#0;class#MainApplication#0" />
-            <element signature="method#CreateTableView#0;class#MainApplication#0" />
-            <element signature="method#removeFromPublicObservableList#0;class#MainApplication#0" />
-            <element signature="method#removeFromSecretObservableList#0;class#MainApplication#0" />
-            <element signature="e#23593#23594#0" expanded="true" />
-            <element signature="e#23621#23622#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pgp/MessageManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="277" column="25" selection-start-line="277" selection-start-column="25" selection-end-line="277" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#SendMessage#0;class#MessageManagement#0" />
-            <element signature="method#writeFileToLiteralData#0;class#MessageManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>No facets are configured</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>pgp</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>lib</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>

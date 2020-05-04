@@ -14,6 +14,7 @@ import org.bouncycastle.openpgp.jcajce.JcaPGPSecretKeyRingCollection;
 import org.bouncycastle.openpgp.operator.PGPDigestCalculator;
 import org.bouncycastle.openpgp.operator.bc.BcPGPKeyPair;
 import org.bouncycastle.openpgp.operator.jcajce.*;
+import org.bouncycastle.util.encoders.Hex;
 
 import java.io.*;
 import java.net.URL;
@@ -22,6 +23,7 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class KeyManagement
 {
@@ -41,61 +43,47 @@ public class KeyManagement
 
             secretKeyRings = new JcaPGPSecretKeyRingCollection(new ArrayList<>());
 
-            File f = new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\pgp\\init.asc");
-            fileInputStream = new FileInputStream(f);
+            File publicDir = new File("src/pgp/keys/public/");
+            File privateDir = new File("src/pgp/keys/private/");
 
-            initializeFromFile(fileInputStream);
+
+            if (publicDir.isDirectory() && publicDir.listFiles() != null) {
+                for (File f : Objects.requireNonNull(publicDir.listFiles())) {
+                    FileInputStream inputStream = new FileInputStream(f);
+                    ImportKeyRings(inputStream);
+                    inputStream.close();
+                }
+            }
+
+            if (privateDir.isDirectory() && privateDir.listFiles() != null) {
+                for (File f : Objects.requireNonNull(privateDir.listFiles())) {
+                    FileInputStream inputStream = new FileInputStream(f);
+                    ImportKeyRings(inputStream);
+                    inputStream.close();
+                }
+            }
+
 
         } catch (IOException | PGPException e)
         {
             e.printStackTrace();
         }
-        finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 
-    }
-
-    private static void initializeFromFile(FileInputStream inputStream) throws IOException {
-        // importing keys from init.asc file
-        ImportKeyRings(inputStream);
     }
 
     public static void SaveAfterExit() throws IOException {
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(new File("C:\\Users\\tf160077d\\Desktop\\zp\\pgp\\src\\pgp\\init.asc"))) {
-            SaveToFile(fileOutputStream);
-        } catch (PGPException e) {
-            e.printStackTrace();
+        // public
+        for (PGPPublicKeyRing publicKeyRing : publicKeyRings) {
+            SaveKeyRingToFile(publicKeyRing);
+        }
+
+        for (PGPSecretKeyRing secretKeyRing : secretKeyRings) {
+            SaveKeyRingToFile(secretKeyRing);
         }
     }
 
-    public static void SaveToFile(FileOutputStream out) throws PGPException, IOException {
-        ArmoredOutputStream armoredOutputStream = new ArmoredOutputStream(out);
 
-        // exporting public keys
-        Iterator<PGPPublicKeyRing> publicKeyRingIterator = publicKeyRings.getKeyRings();
-
-        while (publicKeyRingIterator.hasNext()){
-            PGPPublicKeyRing publicKeyRing = publicKeyRingIterator.next();
-            publicKeyRing.encode(armoredOutputStream);
-        }
-
-        // exporting private keys
-        Iterator<PGPSecretKeyRing> secretKeyRingIterator = secretKeyRings.getKeyRings();
-        while (secretKeyRingIterator.hasNext()){
-            PGPSecretKeyRing secretKeyRing = secretKeyRingIterator.next();
-            secretKeyRing.encode(armoredOutputStream);
-        }
-
-        armoredOutputStream.close();
-    }
 
     public static void GenerateKeyRing(String name, String email, String password, int dsaKeySize, boolean elgamal, int elgamalKeySize) throws NoSuchProviderException, NoSuchAlgorithmException, PGPException
     {
@@ -128,14 +116,50 @@ public class KeyManagement
 
         }
 
+        PGPPublicKeyRing publicKeyRing = generator.generatePublicKeyRing();
+        PGPSecretKeyRing secretKeyRing = generator.generateSecretKeyRing();
 
-        publicKeyRings = JcaPGPPublicKeyRingCollection.addPublicKeyRing(publicKeyRings, generator.generatePublicKeyRing());
-        secretKeyRings = JcaPGPSecretKeyRingCollection.addSecretKeyRing(secretKeyRings, generator.generateSecretKeyRing());
+        publicKeyRings = JcaPGPPublicKeyRingCollection.addPublicKeyRing(publicKeyRings, publicKeyRing);
+        secretKeyRings = JcaPGPSecretKeyRingCollection.addSecretKeyRing(secretKeyRings, secretKeyRing);
+
+        SaveKeyRingToFile(publicKeyRing);
+        SaveKeyRingToFile(secretKeyRing);
 
     }
 
-    public static void initialize(){
+    private static void SaveKeyRingToFile(PGPKeyRing keyRing){
+        String fingerPrint = "";
+        byte [] bytes = keyRing.getPublicKey().getFingerprint();
 
+        String path = "";
+        if (keyRing instanceof PGPSecretKeyRing){
+            path = "src/pgp/keys/private/";
+        }
+        else {
+            path = "src/pgp/keys/public/";
+        }
+
+        fingerPrint = Hex.toHexString(bytes).toUpperCase();
+        File f = new File(path + fingerPrint + ".asc");
+
+        if (f.exists()) return;
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream(f)){
+
+            if (keyRing instanceof PGPSecretKeyRing){
+                ExportSecretKeyRing((PGPSecretKeyRing) keyRing, fileOutputStream, true);
+            }
+            else {
+                ExportPublicKeyRing((PGPPublicKeyRing) keyRing, fileOutputStream, true);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void initialize(){
+        // for static initialize
     }
 
     public static void ExportPublicKeyRing(PGPPublicKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
@@ -222,6 +246,16 @@ public class KeyManagement
 
             publicKeyRings = JcaPGPPublicKeyRingCollection.removePublicKeyRing(publicKeyRings, pgpPublicKeyRing);
 
+            String fingerPrint = "";
+            byte [] bytes = pgpPublicKeyRing.getPublicKey().getFingerprint();
+
+            fingerPrint = Hex.toHexString(bytes).toUpperCase();
+            File f = new File("src/pgp/keys/public/" + fingerPrint + ".asc");
+
+            if (f.exists()){
+                f.delete();
+            }
+
         }
 
     }
@@ -237,6 +271,16 @@ public class KeyManagement
             secretKeyRing.getSecretKey().extractPrivateKey(new JcePBESecretKeyDecryptorBuilder().build(password.toCharArray()));
 
             secretKeyRings = JcaPGPSecretKeyRingCollection.removeSecretKeyRing(secretKeyRings, secretKeyRing);
+
+            String fingerPrint = "";
+            byte [] bytes = secretKeyRing.getPublicKey().getFingerprint();
+
+            fingerPrint = Hex.toHexString(bytes).toUpperCase();
+            File f = new File("src/pgp/keys/private/" + fingerPrint + ".asc");
+
+            if (f.exists()){
+                f.delete();
+            }
 
         }
 
