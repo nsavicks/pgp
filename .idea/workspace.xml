@@ -2,73 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0deffce8-8d40-428b-b4a4-531730fafb3c" name="Default Changelist" comment="Added AES128 class">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/D99633C2E7DC561E64B119C24CE19ABA7CADD193.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$5$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$5$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/MainApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/helpers/NewKeyPairDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/helpers/PasswordDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/helpers/SelectKeyDialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/KeyModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/MessageModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/gui/models/NewKeyPairModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/KeyManagement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/MessageManagement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/init.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/0F317500D6CC318CFE3BC7C04F200130F816CF5A.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/29256BBAC0F0293D19ABA22984F0ABCE2B5884A7.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/3002E7ACCFE2D82D6DCDAEDC764F990FB5A05FCD.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/4C639878ED3536063DD21D79AB8F3BBBFFDD28C0.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/C7C43AA75B7A3490BB8AB769592692BEE24E1E26.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/D67279BF0E7482D05DDA48504DDBE7BB8CC9960B.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/private/E257A93A6A5713DD5D09B11779B37556A64FDA97.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/0F317500D6CC318CFE3BC7C04F200130F816CF5A.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/29256BBAC0F0293D19ABA22984F0ABCE2B5884A7.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/3002E7ACCFE2D82D6DCDAEDC764F990FB5A05FCD.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/4C639878ED3536063DD21D79AB8F3BBBFFDD28C0.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/C7C43AA75B7A3490BB8AB769592692BEE24E1E26.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/D67279BF0E7482D05DDA48504DDBE7BB8CC9960B.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/pgp/keys/public/E257A93A6A5713DD5D09B11779B37556A64FDA97.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/KeyManagementTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/pgp/tests/MessageManagementTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pgp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/pgp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/tests/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/0F317500D6CC318CFE3BC7C04F200130F816CF5A.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/29256BBAC0F0293D19ABA22984F0ABCE2B5884A7.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/3002E7ACCFE2D82D6DCDAEDC764F990FB5A05FCD.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/4C639878ED3536063DD21D79AB8F3BBBFFDD28C0.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/C7C43AA75B7A3490BB8AB769592692BEE24E1E26.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/D67279BF0E7482D05DDA48504DDBE7BB8CC9960B.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/private/E257A93A6A5713DD5D09B11779B37556A64FDA97.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/0F317500D6CC318CFE3BC7C04F200130F816CF5A.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/29256BBAC0F0293D19ABA22984F0ABCE2B5884A7.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/3002E7ACCFE2D82D6DCDAEDC764F990FB5A05FCD.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/4C639878ED3536063DD21D79AB8F3BBBFFDD28C0.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/C7C43AA75B7A3490BB8AB769592692BEE24E1E26.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/D67279BF0E7482D05DDA48504DDBE7BB8CC9960B.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/keys/public/E257A93A6A5713DD5D09B11779B37556A64FDA97.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/helpers/NewKeyPairDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/helpers/NewKeyPairDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/helpers/PasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/helpers/PasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/helpers/SelectKeyDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/helpers/SelectKeyDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/models/KeyModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/models/KeyModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/models/MessageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/models/MessageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gui/models/NewKeyPairModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/models/NewKeyPairModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pgp/KeyManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/KeyManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pgp/MessageManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pgp/init.asc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/KeyManagementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/tests/KeyManagementTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/MessageManagementTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/tests/MessageManagementTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/pgp/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/pgp/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,30 +20,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
-              <caret line="557" column="13" lean-forward="true" selection-start-line="557" selection-start-column="13" selection-end-line="557" selection-end-column="13" />
+            <state relative-caret-position="190">
+              <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#OnlySignMessage#0;class#MessageManagement#0" />
+                <element signature="method#SendMessage#0;class#MessageManagement#0" />
                 <element signature="method#writeFileToLiteralData#0;class#MessageManagement#0" />
-                <element signature="method#ReceiveMessage#0;class#MessageManagement#0" />
+                <element signature="method#ReceiveDetachedMessage#0;class#MessageManagement#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/KeyManagement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+            <state relative-caret-position="-391">
+              <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#SaveAfterExit#0;class#KeyManagement#0" />
                 <element signature="method#GenerateKeyRing#0;class#KeyManagement#0" />
+                <element signature="method#SaveKeyRingToFile#0;class#KeyManagement#0" />
                 <element signature="method#ExportSecretKeyRing#0;class#KeyManagement#0" />
                 <element signature="method#ImportKeyRings#0;class#KeyManagement#0" />
                 <element signature="method#ImportKeyRing#0;class#KeyManagement#0" />
@@ -125,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/MainApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="563" column="45" selection-start-line="563" selection-start-column="45" selection-end-line="563" selection-end-column="45" />
+            <state relative-caret-position="232">
+              <caret line="634" selection-start-line="634" selection-end-line="634" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#start#0;class#MainApplication#0" />
@@ -135,7 +73,6 @@
                 <element signature="method#updatePublicAndPrivateObservableLists#0;class#MainApplication#0" />
                 <element signature="method#removeFromPublicObservableList#0;class#MainApplication#0" />
                 <element signature="method#removeFromSecretObservableList#0;class#MainApplication#0" />
-                <element signature="method#ShowError#0;class#MainApplication#0" />
               </folding>
             </state>
           </provider>
@@ -161,6 +98,10 @@
       <find>detache</find>
       <find>buffer</find>
       <find>export</find>
+      <find>integri</find>
+      <find>PgpEXcep</find>
+      <find>throw new PGPEX</find>
+      <find>nextObject</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -191,9 +132,9 @@
         <option value="$PROJECT_DIR$/src/pgp/KeyManagement.java" />
         <option value="$PROJECT_DIR$/src/pgp/MessageManagement.java" />
         <option value="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/tests/Main.java" />
-        <option value="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java" />
         <option value="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/MainApplication.java" />
         <option value="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/KeyManagement.java" />
+        <option value="$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java" />
       </list>
     </option>
   </component>
@@ -211,6 +152,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -265,7 +207,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -403,6 +344,7 @@
       <workItem from="1589755066379" duration="1759000" />
       <workItem from="1589801877008" duration="620000" />
       <workItem from="1592143408012" duration="5825000" />
+      <workItem from="1592150085797" duration="1785000" />
     </task>
     <task id="LOCAL-00001" summary="Added AES128 class">
       <created>1587653202174</created>
@@ -415,13 +357,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84679000" />
+    <option name="totallyTimeSpent" value="86464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28144988" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28464818" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -430,8 +372,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4452871" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4084507" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29577464" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29469123" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3033586" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -441,7 +383,6 @@
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.19826652" />
-      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32995737" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -451,6 +392,7 @@
       <window_info anchor="right" id="Maven" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32995737" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,10 +412,28 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java</url>
-          <line>338</line>
+          <url>jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPEncryptedData.class</url>
+          <line>39</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java</url>
+          <line>365</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java</url>
+          <line>295</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java</url>
+          <line>302</line>
+          <properties />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -538,10 +498,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSecretKeyRing.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSecretKey.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/bcpg/SymmetricKeyAlgorithmTags.class" />
-    <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/PublicKeyKeyEncryptionMethodGenerator.class" />
     <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcePublicKeyKeyEncryptionMethodGenerator.class" />
     <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcaPGPContentSignerBuilder.class" />
     <entry file="jar://$USER_HOME$/Downloads/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPSignatureGenerator.class" />
@@ -689,13 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyEncryptedData.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="46" column="71" selection-start-line="46" selection-start-column="59" selection-end-line="46" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/operator/jcajce/JcePGPDataEncryptorBuilder.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
@@ -710,19 +659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
-          <caret line="557" column="13" lean-forward="true" selection-start-line="557" selection-start-column="13" selection-end-line="557" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#OnlySignMessage#0;class#MessageManagement#0" />
-            <element signature="method#writeFileToLiteralData#0;class#MessageManagement#0" />
-            <element signature="method#ReceiveMessage#0;class#MessageManagement#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/models/KeyModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -730,10 +666,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/javafx/scene/control/Dialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="262" column="40" lean-forward="true" selection-start-line="262" selection-start-column="40" selection-end-line="262" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/javafx/scene/control/Alert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="244" selection-start-line="244" selection-end-line="244" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPEncryptedData.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPPublicKeyEncryptedData.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-105">
+          <caret line="55" column="30" selection-start-line="55" selection-start-column="21" selection-end-line="55" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/gui/MainApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="563" column="45" selection-start-line="563" selection-start-column="45" selection-end-line="563" selection-end-column="45" />
+        <state relative-caret-position="232">
+          <caret line="634" selection-start-line="634" selection-end-line="634" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#start#0;class#MainApplication#0" />
@@ -742,19 +706,19 @@
             <element signature="method#updatePublicAndPrivateObservableLists#0;class#MainApplication#0" />
             <element signature="method#removeFromPublicObservableList#0;class#MainApplication#0" />
             <element signature="method#removeFromSecretObservableList#0;class#MainApplication#0" />
-            <element signature="method#ShowError#0;class#MainApplication#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/KeyManagement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="61" column="9" lean-forward="true" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+        <state relative-caret-position="-391">
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#SaveAfterExit#0;class#KeyManagement#0" />
             <element signature="method#GenerateKeyRing#0;class#KeyManagement#0" />
+            <element signature="method#SaveKeyRingToFile#0;class#KeyManagement#0" />
             <element signature="method#ExportSecretKeyRing#0;class#KeyManagement#0" />
             <element signature="method#ImportKeyRings#0;class#KeyManagement#0" />
             <element signature="method#ImportKeyRing#0;class#KeyManagement#0" />
@@ -764,6 +728,27 @@
             <element signature="method#GetPublicKeyRing#0;class#KeyManagement#0" />
             <element signature="method#GetKeyOwnerInfo#0;class#KeyManagement#0" />
             <element signature="method#generateKeyPair#0;class#KeyManagement#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/bcpg-jdk15to18-165.jar!/org/bouncycastle/openpgp/PGPObjectFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="86" column="33" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/etf/openpgp/sn160078dtf160077d/pgp/MessageManagement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="298" lean-forward="true" selection-start-line="298" selection-end-line="298" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#OnlySignMessage#0;class#MessageManagement#0" />
+            <element signature="method#SendMessage#0;class#MessageManagement#0" />
+            <element signature="method#writeFileToLiteralData#0;class#MessageManagement#0" />
+            <element signature="method#ReceiveDetachedMessage#0;class#MessageManagement#0" />
           </folding>
         </state>
       </provider>

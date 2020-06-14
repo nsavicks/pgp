@@ -297,7 +297,12 @@ public class MessageManagement
 
             while (true) {
 
-                packet = factory.nextObject();
+                try{
+                    packet = factory.nextObject();
+                }
+                catch (Exception e){
+                    throw new PGPException("Data integrity check failed.");
+                }
 
                 if (packet == null) break;
 
@@ -356,6 +361,12 @@ public class MessageManagement
 
                     } catch (PGPException e) {
                         throw new PGPException("Password for decrypting incorrect!");
+                    }
+
+                    if (selectedEncryptedData.isIntegrityProtected() && !selectedEncryptedData.verify()){
+
+                        throw new PGPException("Data integrity check failed.");
+
                     }
 
                 }
@@ -522,7 +533,13 @@ public class MessageManagement
             Object packet = null;
             while (true) {
 
-                packet = factory.nextObject();
+                try{
+                    packet = factory.nextObject();
+                }
+                catch (Exception e){
+                    throw new PGPException("Data corrupted!");
+                }
+
 
                 if (packet == null) break;
 
