@@ -2,9 +2,12 @@ package etf.openpgp.sn160078dtf160077d.gui.models;
 
 import java.util.List;
 
+
+/**
+ * Class that represents PGP message model
+ */
 public class MessageModel
 {
-
     private String plainText;
 
     private boolean signed;
@@ -15,6 +18,14 @@ public class MessageModel
 
     private List<Long> notFoundKeys;
 
+    /**
+     * Constructor
+     * @param plainText message text
+     * @param signed is message signed
+     * @param verified is message verified
+     * @param signerInfo signer information
+     * @param notFoundKeys keys for signature verification that were not found
+     */
     public MessageModel(String plainText, boolean signed, boolean verified, List<String> signerInfo, List<Long> notFoundKeys)
     {
         this.plainText = plainText;

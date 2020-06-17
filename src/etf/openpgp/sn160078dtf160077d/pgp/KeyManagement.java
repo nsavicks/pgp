@@ -17,11 +17,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
+
+/**
+ * Management of all key operations
+ */
 public class KeyManagement
 {
 
+    /**
+     * Users public key ring collection
+     */
     public static PGPPublicKeyRingCollection publicKeyRings;
 
+    /**
+     * Users secret key ring collection
+     */
     public static PGPSecretKeyRingCollection secretKeyRings;
 
     static {
@@ -63,6 +73,10 @@ public class KeyManagement
 
     }
 
+    /**
+     * Saves all newly added keys to keys directory
+     * @throws IOException
+     */
     public static void SaveAfterExit() throws IOException {
 
         // public
@@ -75,6 +89,18 @@ public class KeyManagement
         }
     }
 
+    /**
+     * Generate new key pair
+     * @param name owner name
+     * @param email owner e-mail
+     * @param password password
+     * @param dsaKeySize DSA key size
+     * @param elgamal is elgamal needed
+     * @param elgamalKeySize elgamal key size
+     * @throws NoSuchProviderException
+     * @throws NoSuchAlgorithmException
+     * @throws PGPException
+     */
     public static void GenerateKeyRing(String name, String email, String password, int dsaKeySize, boolean elgamal, int elgamalKeySize) throws NoSuchProviderException, NoSuchAlgorithmException, PGPException
     {
 
@@ -117,6 +143,10 @@ public class KeyManagement
 
     }
 
+    /**
+     * Helper function to save keyring to file
+     * @param keyRing keyring that we want to save
+     */
     private static void SaveKeyRingToFile(PGPKeyRing keyRing){
         String fingerPrint = "";
         byte [] bytes = keyRing.getPublicKey().getFingerprint();
@@ -148,6 +178,13 @@ public class KeyManagement
         }
     }
 
+    /**
+     * Export public key ring to file
+     * @param keyRing Public key ring that we want to export
+     * @param out file output stream
+     * @param radix64 is radix64 encode needed
+     * @throws IOException
+     */
     public static void ExportPublicKeyRing(PGPPublicKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
     {
 
@@ -162,6 +199,13 @@ public class KeyManagement
 
     }
 
+    /**
+     * Export secret key ring to file
+     * @param keyRing Secret key ring that we want to export
+     * @param out file output stream
+     * @param radix64 is radix64 encode needed
+     * @throws IOException
+     */
     public static void ExportSecretKeyRing(PGPSecretKeyRing keyRing, FileOutputStream out, boolean radix64) throws IOException
     {
 
@@ -176,6 +220,11 @@ public class KeyManagement
 
     }
 
+    /**
+     * Import multiple keyrings from file
+     * @param in file input stream
+     * @throws IOException
+     */
     public static void ImportKeyRings(FileInputStream in) throws IOException {
 
         BcPGPObjectFactory factory = new BcPGPObjectFactory(PGPUtil.getDecoderStream(in));
@@ -199,6 +248,12 @@ public class KeyManagement
 
     }
 
+    /**
+     * Import single keyring from file
+     * @param in
+     * @return PGP key ring
+     * @throws IOException
+     */
     public static PGPKeyRing ImportKeyRing(FileInputStream in) throws IOException
     {
 
@@ -222,6 +277,11 @@ public class KeyManagement
 
     }
 
+    /**
+     * Remove public key ring from collection
+     * @param keyID key ID of key ring
+     * @throws PGPException
+     */
     public static void RemovePublicKeyRing(long keyID) throws PGPException
     {
 
@@ -246,6 +306,12 @@ public class KeyManagement
 
     }
 
+    /**
+     * Remove secret key ring from collection
+     * @param keyID key ID of key ring
+     * @param password password
+     * @throws PGPException
+     */
     public static void RemoveSecretKeyRing(long keyID, String password) throws PGPException
     {
 
@@ -272,6 +338,12 @@ public class KeyManagement
 
     }
 
+    /**
+     * Get secret key ring with given Key ID
+     * @param keyID key ID
+     * @return PGP secret key ring
+     * @throws PGPException
+     */
     public static PGPSecretKeyRing GetSecretKeyRing(long keyID) throws PGPException
     {
 
@@ -279,6 +351,12 @@ public class KeyManagement
 
     }
 
+    /**
+     * Get public key ring with given key id
+     * @param keyID key id
+     * @return PGP public key ring
+     * @throws PGPException
+     */
     public static PGPPublicKeyRing GetPublicKeyRing(long keyID) throws PGPException
     {
 
@@ -286,6 +364,12 @@ public class KeyManagement
 
     }
 
+    /**
+     * Gets key owner info
+     * @param keyID key id
+     * @return String
+     * @throws PGPException
+     */
     public static String GetKeyOwnerInfo(long keyID) throws PGPException {
 
         if (publicKeyRings.getPublicKeyRing(keyID) != null)
@@ -294,6 +378,14 @@ public class KeyManagement
             return null;
     }
 
+    /**
+     * Generate new key pair
+     * @param algorithm Public key algorithm
+     * @param keySize key size
+     * @return KeyPair
+     * @throws NoSuchProviderException
+     * @throws NoSuchAlgorithmException
+     */
     private static KeyPair generateKeyPair(String algorithm, int keySize) throws NoSuchProviderException, NoSuchAlgorithmException
     {
 

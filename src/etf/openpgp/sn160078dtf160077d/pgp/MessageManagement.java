@@ -20,14 +20,25 @@ import java.security.SignatureException;
 import java.util.*;
 
 
+/**
+ * Management of all message operations in PGP
+ */
 public class MessageManagement
 {
 
-
+    /**
+     * Creates detached signature
+     * @param plaintext message plaintext
+     * @param secretKey secret key
+     * @param password password for secret key
+     * @param fileOut file output stream
+     * @throws PGPException
+     * @throws IOException
+     * @throws SignatureException
+     */
     public static void OnlySignMessage(
             String plaintext,
             PGPSecretKeyRing secretKey,
-            int algorithm,
             String password,
             FileOutputStream fileOut
     ) throws PGPException, IOException, SignatureException {
@@ -68,6 +79,23 @@ public class MessageManagement
 
     }
 
+    /**
+     * Sends PGP message
+     * @param plaintext message plaintext
+     * @param encrypt is encryption needed
+     * @param sign is signing needed
+     * @param compress is compression needed
+     * @param radix64 is radix64 encoding needed
+     * @param secretKey secret key for signing
+     * @param publicKeys list of public keys for encryption
+     * @param algorithm algorithm for encryption
+     * @param password password for secret key
+     * @param fileOut file output stream
+     * @throws IOException
+     * @throws PGPException
+     * @throws NoSuchAlgorithmException
+     * @throws SignatureException
+     */
     public static void SendMessage(
             String plaintext,
             boolean encrypt,
@@ -227,6 +255,17 @@ public class MessageManagement
 
     }
 
+    /**
+     * Creates literal data from file
+     * @param out output stream
+     * @param fileType file type
+     * @param file TMP file
+     * @param buffer buffer
+     * @param signatureGenerator signature generator
+     * @throws IOException
+     * @throws SignatureException
+     * @throws PGPException
+     */
     public static void writeFileToLiteralData(OutputStream out, char fileType,
                                        File file, byte[] buffer, PGPSignatureGenerator
                                                signatureGenerator)
@@ -272,6 +311,13 @@ public class MessageManagement
     }
 
 
+    /**
+     * Recieves PGP message from file
+     * @param file file
+     * @return
+     * @throws IOException
+     * @throws PGPException
+     */
     public static MessageModel ReceiveMessage(
             File file
     ) throws IOException, PGPException
@@ -506,6 +552,14 @@ public class MessageManagement
         return new MessageModel(finalMessage, signed, verified, validVerifiers, notFoundKeys);
     }
 
+    /**
+     * Recieve detached message
+     * @param signFile Signature file
+     * @param messageFile Message file
+     * @return
+     * @throws IOException
+     * @throws PGPException
+     */
     public static MessageModel ReceiveDetachedMessage(
             File signFile,
             File messageFile

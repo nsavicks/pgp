@@ -1,5 +1,8 @@
 package etf.openpgp.sn160078dtf160077d.gui.models;
 
+/**
+ * Class that represents new key pair model while generating new keys
+ */
 public class NewKeyPairModel {
 
     private String name, email;
@@ -9,6 +12,15 @@ public class NewKeyPairModel {
 
     private String password;
 
+    /**
+     * Constructor
+     * @param name owner name
+     * @param email owner e-mail
+     * @param sizeDSA size of DSA key
+     * @param sizeElGamal size of ElGamal key
+     * @param isElGamal is elgamal selected
+     * @param password password
+     */
     public NewKeyPairModel(String name, String email, int sizeDSA, int sizeElGamal, boolean isElGamal, String password) {
         this.name = name;
         this.email = email;
